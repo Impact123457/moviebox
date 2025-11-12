@@ -7,9 +7,14 @@ export default function Home() {
     <div className="divH1">
       <h1 className="heading">Welcome to MovieBox</h1>
         <p className="opis">
-          MovieBox is your personal movie tracker.Where movies live beyond the credits. 
-          Track what you watch, make playlists, save what you like and kepp track of what you wish to watch next.
-          Made for the true movie lovers! We wish you happy scrolling and may the force be with you.
+          <b>MovieBox</b> is the ultimate app for movie lovers.
+          <br></br>
+          Keep track of everything you watch, create custom playlists, save your favorites, and organize your “must-watch” list for the next movie night.
+          Whether you are a casual viewer or a dedicated cinephile, MovieBox helps you never lose track of a single title. Discover new films, revisit old classics, and share your cinematic journey with friends.
+          <br></br>
+          Designed for true movie enthusiasts, MovieBox turns your movie-watching experience into a fully organized, enjoyable journey. 
+          <br></br><br></br>
+          <b>- Happy scrolling, and may the force be with you!</b>
         </p>
     </div>
 

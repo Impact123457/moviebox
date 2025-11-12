@@ -23,18 +23,37 @@
 justify-center - centriranje vsebine po horizontalni osi
 items-center - centriranje vsebine po vertikalni osi
 flex-col - da so podatki v stolpcu
+w-[50vw] - div je zdej vedno širok za pol screena
 */
 
 @layer utilities{
   .heading{
     @apply uppercase bg-black px-6 py-6 font-sans font-extrabold text-primary sm:text-[54px] sm:leading-16 text-[55px] leading-[46px] max-w-5xl text-center;
-    }
+  }
   .divH1{
-    @apply max-w-[800px] min-h-[530px] py-7 px-6;
-    }
+    @apply w-[60vw] min-h-[530px] py-7 px-6;
+  }
+  .divImg{
+    @apply w-[40vw] min-h-[530px] py-7 px-6;
+  }
   .opis{
     @apply py-5 text-[20px] text-black max-w-2xl;
-    }
+  }
+  .h2{
+    @apply font-sans font-extrabold mb-6 text-center sm:text-[34px] text-[35px];
+  }
+  .karticeDIV{
+   @apply flex justify-center items-center gap-6;
+  }
+  .kartica{
+    @apply bg-gray-900 rounded-lg overflow-hidden shadow-lg min-h-[230px] w-[400px];
+  }
+  .text{
+    @apply text-gray-400 font-sans py-7 text-center text-[20px];
+  }
+  .h3{
+    @apply font-semibold text-2xl text-center;
+  }
 }
 
 body {

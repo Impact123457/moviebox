@@ -5,9 +5,9 @@ export default function Home() {
   <div className="flex">
     
     <div className="divH1">
-      <h1 className="heading">Welcome to MovieBox</h1>
+      <h1 className="heading">Welcome to WebInspector</h1>
         <p className="opis">
-          <b>MovieBox</b> is the ultimate app for movie lovers.
+          <b>WebInspector</b> is the ultimate app for movie lovers.
           <br></br>
           Keep track of everything you watch, create custom playlists, save your favorites, and organize your “must-watch” list for the next movie night.
           Whether you are a casual viewer or a dedicated cinephile, MovieBox helps you never lose track of a single title. Discover new films, revisit old classics, and share your cinematic journey with friends.
@@ -31,7 +31,7 @@ export default function Home() {
 
         <div className="kartica">
           <div className="p-3">
-            <h3 className="h3">❤️Liking movies</h3>
+            <h3 className="h3">Liking movies</h3>
             <p className="text">
               Mark movies you love or want to remember. 
               Helps you track favorites and get tailored recommendations.
@@ -41,7 +41,7 @@ export default function Home() {
 
         <div className="kartica">
           <div className="p-3">
-            <h3 className="h3">🔎Browsing movies</h3>
+            <h3 className="h3">Browsing movies</h3>
             <p className="text">
               Discover new films or revisit classics by 
               searching through genres, years, popularity, or curated lists.
@@ -51,7 +51,7 @@ export default function Home() {
 
         <div className="kartica">
           <div className="p-3">
-            <h3 className="h3">📚Log watched movies</h3>
+            <h3 className="h3">Log watched movies</h3>
             <p className="text">
               Keep a personal record of all movies you have seen, including ratings, dates, and notes. 
               Perfect for reflecting on your viewing history.
@@ -61,7 +61,7 @@ export default function Home() {
 
         <div className="kartica">
           <div className="p-3">
-            <h3 className="h3">🎞️Create lists</h3>
+            <h3 className="h3">Create lists</h3>
             <p className="text">
               Organize movies into themed or personal collections, like 
               “Absolute cinema” or “Cozy night” for easy access.

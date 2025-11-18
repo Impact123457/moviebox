@@ -16,12 +16,11 @@ const Footer = () =>{
                     </p>
                 </div>
                 <div className="flex items-right gap-5 text-black uppercase font-bold w-[300px]">
-                    <p>Contact information:
+                    <p>Contact information: 
                     <br></br>  
-                    <ul>
-                        <li>movieBox.info@gmail.com</li>
-                        <li>+368 098 123 333</li>
-                    </ul>
+                    movieBox.info@gmail.com
+                    <br></br> 
+                    +368 098 123 333
                     </p>
                 </div>
             </div>

@@ -5,9 +5,9 @@ export default function Home() {
   <div className="flex">
     
     <div className="divH1">
-      <h1 className="heading">Welcome to WebInspector</h1>
+      <h1 className="heading">Welcome to MovieBox</h1>
         <p className="opis">
-          <b>WebInspector</b> is the ultimate app for movie lovers.
+          <b>movieBox</b> is the ultimate app for movie lovers.
           <br></br>
           Keep track of everything you watch, create custom playlists, save your favorites, and organize your “must-watch” list for the next movie night.
           Whether you are a casual viewer or a dedicated cinephile, MovieBox helps you never lose track of a single title. Discover new films, revisit old classics, and share your cinematic journey with friends.

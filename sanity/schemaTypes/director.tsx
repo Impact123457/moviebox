@@ -1,9 +1,9 @@
 import {UserIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
-export const user = defineType({
-  name: 'user',
-  title: 'User',
+export const directior = defineType({
+  name: 'director',
+  title: 'Director',
   type: 'document',
   fields: [
     defineField({
@@ -11,16 +11,11 @@ export const user = defineType({
       type: 'string',
     }),
     defineField({
-      name: 'username',
+      name: 'surname',
       type: 'string',
     }),
     defineField({
-      name: 'email',
-      type: 'string',
-      validation: (Rule) => Rule.min(10).required().error("Enter you email."),
-    }),
-    defineField({
-      name: 'bio',
+      name: 'biography',
       type: 'text',
     }),
     defineField({

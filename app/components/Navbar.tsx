@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { auth, signOut, signIn } from "@/auth";
-import { redirect } from "next/dist/server/api-utils";
+
 const Navbar = async() =>{   
     const session = await auth();//a je user prijavlen
 //<span>{session?.user?.name}</span>
@@ -32,12 +32,9 @@ const Navbar = async() =>{
                      </>
                     ):(
                         <>
-                        <form action={async() => {
-                            "use server";
-                            await signIn('github')
-                        }}>
+                        <Link href="/signIn">
                             <button type="submit" className="uppercase font-bold cursor-pointer">Log in</button>
-                        </form>
+                        </Link>
                         </>
                     )}
                 </div>

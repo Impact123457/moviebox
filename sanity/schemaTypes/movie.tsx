@@ -1,31 +1,31 @@
-import {UserIcon} from '@sanity/icons'
+import {GenerateIcon, UserIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
-export const user = defineType({
-  name: 'user',
-  title: 'User',
+export const movie = defineType({
+  name: 'movie',
+  title: 'Movie',
   type: 'document',
   fields: [
     defineField({
-      name: 'name',
+      name: 'title',
       type: 'string',
     }),
     defineField({
-      name: 'username',
-      type: 'string',
+      name: 'release',
+      type: 'date',
     }),
     defineField({
-      name: 'email',
-      type: 'string',
-      validation: (Rule) => Rule.min(10).required().error("Enter you email."),
-    }),
-    defineField({
-      name: 'bio',
+      name: 'description',
       type: 'text',
     }),
     defineField({
       name: 'image',
       type: 'url',
+    }),
+    defineField({
+      name: 'genre',
+      type: 'reference',
+      to: {type: 'genre'},
     }),
 ],
 preview:{

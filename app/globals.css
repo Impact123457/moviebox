@@ -28,34 +28,34 @@ w-[50vw] - div je zdej vedno širok za pol screena
 
 @layer utilities{
   .heading{
-    @apply uppercase bg-black px-6 py-6 font-sans font-extrabold text-primary sm:text-[54px] sm:leading-16 text-[55px] leading-[46px] max-w-5xl text-center;
+    @apply uppercase bg-black px-6 py-6 font-sans font-extrabold text-primary text-[40px] leading-[46px] max-w-3xl text-center;
   }
   .divH1{
-    @apply w-[60vw] min-h-[530px] py-7 px-6;
+    @apply w-[60vw] min-h-[300px] py-7 px-6;
   }
   .divImg{
-    @apply w-[40vw] min-h-[530px] py-7 px-6;
+    @apply w-[40vw] min-h-[300px] py-7 px-6;
   }
   .opis{
-    @apply py-5 text-[20px] text-black max-w-5xl;
+    @apply py-5 text-[15px] text-black max-w-3xl;
   }
   .h2{
-    @apply font-sans font-extrabold mb-6 text-center sm:text-[34px] text-[35px];
+    @apply font-sans font-extrabold text-center text-[30px];
   }
   .karticeDIV{
-   @apply h-[400px] flex justify-center items-center gap-6;
+   @apply h-[300px] flex justify-center items-center gap-6;
   }
   .kartica{
-    @apply bg-gray-950 rounded-lg overflow-hidden shadow-lg min-h-[230px] w-[400px] py-2;
+    @apply bg-gray-950 rounded-lg overflow-hidden shadow-lg min-h-[150px] w-[250px] py-2;
   } 
   .kartica:hover {
-  @apply bg-gray-700 min-h-[250px];
+  @apply bg-gray-700 min-h-[200px];
   }
   .text{
-    @apply text-gray-400 font-sans py-5 text-center text-[20px];
+    @apply text-gray-400 font-sans py-5 text-center text-[15px];
   }
   .h3{
-    @apply font-semibold text-2xl text-center;
+    @apply font-semibold text-[20px] text-center;
   }
   .signIn{
     @apply w-[600px] h-[600px] justify-center items-center bg-white text-black rounded-lg;

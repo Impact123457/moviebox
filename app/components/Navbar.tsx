@@ -6,15 +6,15 @@ const Navbar = async() =>{
     const session = await auth();//a je user prijavlen
 //<span>{session?.user?.name}</span>
     return(
-        <header className="px-5 py-5 bg-white shadow-sm">
+        <header className="bg-white shadow-sm">
             <nav className="flex justify-between items-center">
                 <div className="p-3">
                     <Link href="/">
-                        <Image src="/logo.png" alt="logo" width={120} height={120}></Image>
+                        <Image src="/logo.png" alt="logo" width={90} height={90}></Image>
                     </Link>
                 </div>
 
-                <div className="flex items-center gap-5 text-black uppercase font-bold">
+                <div className="mx-3 flex items-center gap-5 text-black uppercase font-bold text-[15px]">
                     {session && session?.user ?(
                      <> 
                         <Link href="/movies">

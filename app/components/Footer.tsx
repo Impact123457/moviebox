@@ -2,20 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 const Footer = () =>{
     return(
-        <section className="px-5 py-5 bg-white shadow-sm font-sans">
+        <section className="py-5 bg-white shadow-sm font-sans">
             <div className="flex justify-between items-center">
-                <div className="p-5">
+                <div className="p-3">
                     <Link href="/">
-                        <Image src="/logo.png" alt="logo" width={120} height={120} />
+                        <Image src="/logo.png" alt="logo" width={90} height={90} />
                     </Link>
                 </div>
-                <div className="flex items-center gap-5 text-black uppercase font-bold w-[500px] text-center">
+                <div className="flex items-center text-black w-[600px] text-center">
                     <p>
                         Keep track of everything you watch, create custom playlists, 
                         save your favorites, and organize your “must-watch” list for the next movie night.
                     </p>
                 </div>
-                <div className="flex items-right gap-5 text-black uppercase font-bold w-[300px]">
+                <div className="flex items-right text-black w-[200px]">
                     <p>Contact information: 
                     <br></br>  
                     movieBox.info@gmail.com

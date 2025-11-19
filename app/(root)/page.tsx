@@ -19,11 +19,11 @@ export default function Home() {
     </div>
 
     <div className="divImg">
-        <Image src="/r2d2&c3po.png" alt="droids" width={600} height={600}/>
+        <Image src="/r2d2&c3po.png" alt="droids" width={400} height={400}/>
     </div>  
 
   </div>
-  <section className="bg-black text-primary py-10">
+  <section className="bg-black text-primary py-5">
 
       <h2 className="h2">WE OFFER YOU</h2>
 

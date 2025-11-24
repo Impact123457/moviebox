@@ -2,22 +2,21 @@ import { auth, signOut, signIn } from "@/auth";
 import Link from "next/link";
 export default function SignIn(){
     return(
-        <section className="signForm">
-            <form>
-                <h1>Log in</h1>
-                    <p>Gmail: </p>
-                    <p>Password: </p>
-                    <button type="submit" className="uppercase font-bold cursor-pointer">Sign in</button>
-            </form>
-            <form action={async() => {
-                    "use server";
-                    await signIn('github')
-                }}>
-                    <button type="submit" className="uppercase font-bold cursor-pointer">Sign in with github</button>
-            </form>
-            <Link href="/register">
-                <p className="uppercase font-bold">Don't have an account?</p>
-            </Link>
-        </section>
-    );
+    <section className="signSection bg-red-500 overflow-hidden">
+        <h1 className="text-center py-5 text-2xl font-bold">Welcome back!</h1>
+        <form className="signForm" action={async() => {
+                "use server";
+                await signIn('github')
+            }}>
+                <input className="input" type="email" id="email" name="email" placeholder="email" /><br></br>
+                <input className="input" type="password" id="pass" name="pass" placeholder="password" /><br></br>
+                <button type="submit" className="signButton p-2 text-[12px] font-bold text-white bg-gray-300 rounded-[30px] border-[1px] border-white">Sign in</button><br></br>            
+                <button type="submit" className="signButton">Sign in with github</button>
+        
+        <Link href="/register">
+            <p>Don't have an account?</p>
+        </Link>
+        </form>
+    </section>
+);
 }

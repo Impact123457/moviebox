@@ -19,7 +19,7 @@ export const directior = defineType({
     }),
     defineField({
       name: 'image',
-      type: 'url',
+      type: 'image',
     }),
 ],
 preview:{

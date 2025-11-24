@@ -19,7 +19,7 @@ export const movie = defineType({
     }),
     defineField({
       name: 'image',
-      type: 'url',
+      type: 'image',
     }),
     defineField({
       name: 'genre',

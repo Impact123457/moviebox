@@ -57,8 +57,17 @@ w-[50vw] - div je zdej vedno širok za pol screena
   .h3{
     @apply font-semibold text-[20px] text-center;
   }
-  .signIn{
-    @apply w-[600px] h-[600px] justify-center items-center bg-white text-black rounded-lg;
+  .signForm{
+    @apply text-gray-400 bg-blue-900 p-10;
+  }
+  .signSection{
+    @apply  max-w-[500px] max-h-[300px] my-5 px-20 text-black text-[15px];
+  }
+  .input{
+    @apply w-[200px] h-[40px] rounded-[10px] text-white border-1 border-white bg-gray-600 p-1 m-1 text-[12px];
+  }
+  .signButton{
+    @apply cursor-pointer;
   }
 }
 

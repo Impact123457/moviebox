@@ -23,6 +23,10 @@ export const user = defineType({
       type: 'text',
     }),
     defineField({
+      name: 'password',
+      type: 'string',
+    }),
+    defineField({
       name: 'image',
       type: 'url',
     }),

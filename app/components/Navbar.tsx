@@ -32,7 +32,7 @@ const Navbar = async() =>{
                      </>
                     ):(
                         <>
-                        <Link href="/signIn">
+                        <Link href="/login">
                             <button type="submit" className="uppercase font-bold cursor-pointer">Log in</button>
                         </Link>
                         </>

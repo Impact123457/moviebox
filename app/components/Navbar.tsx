@@ -26,15 +26,15 @@ const Navbar = async() =>{
                         }}>
                             <button type="submit" className="uppercase font-bold cursor-pointer">Log out</button>
                         </form>
-                        <Link href={'/user/${session?.id}'}>
+                        <Link href={`/user/${session?.user?.id}`}>
                             <Image src="/profile.png" alt="profile icon" width={40} height={40} className="rounded-full"/>
                         </Link>
                      </>
                     ):(
                         <>
-                        <Link href="/login">
-                            <button type="submit" className="uppercase font-bold cursor-pointer">Log in</button>
-                        </Link>
+                            <Link href="/login">
+                                <button type="submit" className="uppercase font-bold cursor-pointer">Log in</button>
+                            </Link>
                         </>
                     )}
                 </div>

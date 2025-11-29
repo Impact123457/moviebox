@@ -1,11 +1,13 @@
-import NextAuth from "next-auth"
+import { default as NextAuth } from 'next-auth';
 import GitHub from "next-auth/providers/github"
+import { client } from "./sanity/lib/client";
+import { USER_BY_GITHUB_ID_QUERY, USER_BY_ID_QUERY } from "./sanity/lib/queries";
+import { writeClient } from "./sanity/lib/write-client";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { client } from "@/sanity/lib/client";
 import bcrypt from "bcryptjs";
-import { NextAuthConfig } from "next-auth";
 
-export const authConfig: NextAuthConfig = {
+export const { handlers, signIn, signOut, auth } = NextAuth({
+
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -22,63 +24,60 @@ export const authConfig: NextAuthConfig = {
   const password = String(credentials.password);
 
   const user = await client.fetch(
-    `*[_type == "user" && email == $email][0]`,
-    { email }
-  );
+  USER_BY_ID_QUERY, { email });
 
   if (!user) return null;
+  if (!user.password) return null;
+  //console.log(user);
+  //console.log(user.image,)
 
   const isCorrect = await bcrypt.compare(password, user.password);
   if (!isCorrect) return null;
-
   return {
     id: user._id,
     name: user.name,
     email: user.email,
-    emailVerified: null, 
+    emailVerified: null,
+    image: user.image,
   };
 }
 
     }),
-
-    GitHub,
-  ],
-
-  session: { strategy: "jwt" },
-
+    GitHub],
   callbacks: {
-  async jwt({ token, user }) {
-    if (user) {
-      token.user = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        emailVerified: null,
-      };
-    }
-
-    return token;
-  },
-
-  async session({ session, token }) {
-    if (token.user) {
-      session.user = token.user as {
-        id: string;
-        name: string;
-        email: string;
-        emailVerified: Date | null;
-      };
-    }
-
-    return session;
-  },
-
-    authorized() {
+    async signIn({ user, profile, account }) {
+      if(account?.provider == "github"){
+        const existingUser = await client.fetch(USER_BY_GITHUB_ID_QUERY, { 
+          id: profile?.id,
+       });
+      if(!existingUser){
+        await writeClient.create({
+          _type: 'author',
+          id: profile?.id,
+          name: user?.name,
+          email: user?.email,
+          imageUrl: user?.image,
+        })
+      }
+      }
       return true;
-    }
-  },
-};
+    },
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [GitHub],
+    async jwt({token, account, profile}){
+      if(account && profile){
+        const user = await client.fetch(USER_BY_GITHUB_ID_QUERY, {
+          id: profile?.id,
+        });
+
+        token.id = user?.id;
+        token.imageUrl = user?.imageUrl;
+      }
+      return token;
+    },
+
+    async session({ session, token }){
+      Object.assign(session.user, {id: token.id, imageUrl: token.imageUrl,});
+      return session;
+    },
+  }
 })

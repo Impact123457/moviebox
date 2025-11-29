@@ -14,7 +14,7 @@ export const user = defineType({
       type: 'string',
     }),
     defineField({
-      name: 'email',
+      name: 'gmail',
       type: 'string',
       validation: (Rule) => Rule.min(10).required().error("Enter you email."),
     }),

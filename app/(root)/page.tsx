@@ -4,7 +4,6 @@ export default async function Home() {
   return (
   <>
   <div className="flex">
-    
     <div className="divH1">
       <h1 className="heading">Welcome to MovieBox</h1>
         <p className="opis">

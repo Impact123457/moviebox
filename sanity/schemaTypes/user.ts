@@ -28,7 +28,7 @@ export const user = defineType({
     }),
     defineField({
       name: 'image',
-      type: 'url',
+      type: 'image',
     }),
 ],
 preview:{

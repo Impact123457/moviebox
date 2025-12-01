@@ -69,6 +69,9 @@ w-[50vw] - div je zdej vedno širok za pol screena
   .logButton{
     @apply border cursor-pointer w-full p-2 rounded;
   }
+  .cardDiv{
+   @apply p-5 mb-5 flex-wrap gap-4 flex max-h-fit max-w-7xl;
+  }
 }
 
 body {

@@ -21,3 +21,27 @@ export const USER_BY_ID_QUERY = defineQuery(
   imageUrl
 }`
 );
+export const MOVIE_QUERY = 
+  defineQuery(`*[_type == "movie"]{
+    _id,
+    title,
+    release,
+    description,
+    genre ->{
+    _id, name
+    },
+    director ->{
+    name
+    },
+    "image": image.asset->url,
+  }`);
+export const USER_QUERY = 
+  defineQuery(`*[_type == "movie"]{
+    _id,
+    name,
+    username,
+    gmail,
+    bio,
+    password,
+    "image": image.asset->url,
+  }`);

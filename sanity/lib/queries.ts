@@ -11,9 +11,8 @@ export const USER_BY_GITHUB_ID_QUERY = defineQuery(
     }`
 );
 export const USER_BY_ID_QUERY = defineQuery(
-   `*[_type == "author" && email == $email][0]{
-  _id,
-  id,
+   `*[_type == "user" && _id == $id][0]{
+  _id,  
   name,
   email,
   password,
@@ -21,6 +20,22 @@ export const USER_BY_ID_QUERY = defineQuery(
   imageUrl
 }`
 );
+
+export const MOVIE_BY_ID_QUERY = `
+*[_type == "movie" && _id == $id][0]{
+  _id,
+  title,
+  release,
+  description,
+  genre->{
+    _id,
+    name
+  },
+  director->{
+    name
+  },
+  "image": image.asset->url
+}`;
 export const MOVIE_QUERY = 
   defineQuery(`*[_type == "movie"]{
     _id,

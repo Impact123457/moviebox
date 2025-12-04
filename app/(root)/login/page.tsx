@@ -26,7 +26,7 @@ export default function LoginPage() {
   return (
     <section className="signSection">
       <div className="signForms">
-        <h2 className="text-2xl font-semibold text-center m-5">Welcome back!</h2>
+        <h2 className="text-2xl text-black font-semibold text-center m-5">Welcome back!</h2>
         <form onSubmit={handleLogin} className="space-y-3">
           <input type="email" className="input" placeholder="email" onChange={(e) => setEmail(e.target.value)} required/>
           <input type="password" className="input" placeholder="password" onChange={(e) => setPassword(e.target.value)} required/>

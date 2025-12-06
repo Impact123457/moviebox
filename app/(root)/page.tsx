@@ -14,7 +14,7 @@ export default async function Home() {
           <br></br>
           Designed for true movie enthusiasts, MovieBox turns your movie-watching experience into a fully organized, enjoyable journey. 
           <br></br><br></br>
-          <b>- Happy scrolling, and may the force be with you!</b>
+          <b>- Happy scrolling and may the force be with you!</b>
         </p>
     </div>
 

@@ -14,13 +14,7 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
   return (
     <div className="p-5">
       <h1 className="text-3xl font-bold mb-4">{movie.title}</h1>
-      <Image 
-        src={movie.image}
-        width={300}
-        height={450}
-        alt={movie.title}
-        className="rounded shadow"
-      />
+      <Image src={movie.image} width={300} height={450} alt={movie.title} className="rounded shadow" />
       <p className="mt-4"><strong>Genre:</strong> {movie.genre.name}</p>
       <p><strong>Year:</strong> {movie.release}</p>
       <p className="mt-4 max-w-2xl">{movie.description}</p>

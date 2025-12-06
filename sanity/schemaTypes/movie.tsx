@@ -6,10 +6,6 @@ export const movie = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: '_id',
-      type: 'number',
-    }),
-    defineField({
       name: 'name',
       type: 'string',
     }),

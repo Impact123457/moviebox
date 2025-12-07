@@ -10,7 +10,7 @@ export default async function Movies({searchParams}: {
     const movies = await client.fetch(MOVIE_QUERY);
     return(
     <>
-        <div className="max-w-[900px] mx-auto my-5 p-5 shadow-lg">
+        <div className="max-w-[900px] mx-auto my-5 p-5">
             
             {/*<p>{querys ? 'Serch results for "${query}"' : 'Movies'}</p>*/}      
                 <div className="flex items-center justify-between">

@@ -32,7 +32,8 @@ export const MOVIE_BY_ID_QUERY = `
     name
   },
   director->{
-    name
+    name,
+    surname
   },
   "image": image.asset->url
 }`;

@@ -2,12 +2,14 @@ import { MOVIE_QUERY } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 import MovieCard, { MovieTypeCard } from "@/app/components/MovieCard";
 import SearchForm from "@/app/components/SearchForm";
+import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 
 export default async function Movies({searchParams}: {
     searchParams: Promise<{ query?: string }>
 }){
     const query = (await searchParams).query;
-    const movies = await client.fetch(MOVIE_QUERY);
+    const params = { search: query || null}
+    const {data: movies} = await sanityFetch({ query: MOVIE_QUERY, params});
     return(
     <>
         <div className="max-w-[900px] mx-auto my-5 p-5">
@@ -31,6 +33,7 @@ export default async function Movies({searchParams}: {
                     </ul>
                 </div>
         </div>
-    </>  
+        <SanityLive />
+       </>  
     );
 }

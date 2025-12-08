@@ -14,10 +14,12 @@ export const USER_BY_ID_QUERY = defineQuery(
    `*[_type == "user" && _id == $id][0]{
   _id,  
   name,
+  surname,
+  username,
+  bio,
   email,
   password,
   "image": image.asset->url,
-  imageUrl
 }`
 );
 export const MOVIE_BY_ID_QUERY = `
@@ -37,7 +39,7 @@ export const MOVIE_BY_ID_QUERY = `
   "image": image.asset->url
 }`;
 export const MOVIE_QUERY = 
-  defineQuery(`*[_type == "movie"]{
+  defineQuery(`*[_type == "movie" && !defined($search) || title match $search] | order(_createdAt desc) {
     _id,
     title,
     release,

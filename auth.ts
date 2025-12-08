@@ -52,8 +52,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
        });
       if(!existingUser){
         await writeClient.create({
-          _type: 'author',
-          id: profile?.id,
+          _type: 'user',
+          id: profile?._id,
           name: user?.name,
           email: user?.email,
           imageUrl: user?.image,
@@ -69,7 +69,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           id: profile?.id,
         });
 
-        token.id = user?.id;
+        token.id = user?._id;
         token.imageUrl = user?.imageUrl;
       }
       return token;

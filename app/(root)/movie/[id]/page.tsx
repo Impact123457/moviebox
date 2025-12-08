@@ -26,7 +26,7 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
           <h1 className="text-[30px] font-bold">{movie.title}</h1>
             <div className="flex">
               <p>{movie.release}</p>
-              <p className="mx-2">Directed by: <Link href="/" className="undreline">{movie.director.name}{movie.director.surname}</Link></p>
+              <p className="mx-2">Directed by: <Link href="/" className="">{movie.director.name}{movie.director.surname}</Link></p>
               <p className="mx-2">Genre: {movie.genre.name}</p>
             </div>
           <p className="mt-4 max-w-[400px]">{movie.description}</p>

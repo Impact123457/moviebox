@@ -1,5 +1,4 @@
 import Form from "next/form";
-import SearchFormReset from "./SearchFormReset";
 import Image from "next/image";
 
 const SearchForm = ({query}: {query?: string}) => {
@@ -12,8 +11,7 @@ const SearchForm = ({query}: {query?: string}) => {
                 placeholder="search..."
             />
             <div className="gap-2">
-                {query && <SearchFormReset />}
-                <button>
+                <button type="submit">
                     <Image src="/search.png" alt="search" width={20} height={20} className="submit"/>
                 </button>
             </div>

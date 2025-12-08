@@ -3,8 +3,9 @@ import Image from "next/image"
 import { auth, signOut, signIn } from "@/auth";
 
 const Navbar = async() =>{   
+
     const session = await auth();//a je user prijavlen
-//<span>{session?.user?.name}</span>
+
     return(
         <header className="bg-white shadow-sm">
             <nav className="flex justify-between items-center">
@@ -42,4 +43,4 @@ const Navbar = async() =>{
         </header>
     )
 }
-export default Navbar
+export default Navbar;

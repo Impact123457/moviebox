@@ -10,13 +10,16 @@ export const user = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'surname',
+      type: 'string',
+    }),
+    defineField({
       name: 'username',
       type: 'string',
     }),
     defineField({
-      name: 'gmail',
+      name: 'email',
       type: 'string',
-      validation: (Rule) => Rule.min(10).required().error("Enter you email."),
     }),
     defineField({
       name: 'bio',

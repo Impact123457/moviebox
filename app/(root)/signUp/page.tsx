@@ -8,30 +8,36 @@ export default function RegisterPage() {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
-
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
+  e.preventDefault();
+  setLoading(true);
 
-    const res = await fetch("/api/signUp", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password }),
-    });
+  const res = await fetch("/api/signUp", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ 
+      name, 
+      surname, 
+      username, 
+      email, 
+      password 
+    }),
+  });
 
-    const data = await res.json();
-    setLoading(false);
+  const data = await res.json();
+  setLoading(false);
 
-    if (res.ok) {
-      alert("Registration successful! You can now log in.");
-      router.push("../login");
-    } else {
-      alert(data.error || "Something went wrong");
-    }
-  };
+  if (res.ok) {
+    alert("Registration successful! You can now log in.");
+    router.push("../login");
+  } else {
+    alert(data.error || "Something went wrong");
+  }
+};
 
   return (
   <section className="signSection">
@@ -40,6 +46,7 @@ export default function RegisterPage() {
       <form onSubmit={handleSubmit} className="space-y-3">
         <input className="input" type="text" placeholder="name" value={name} onChange={(e) => setName(e.target.value)} required/>
         <input className="input" type="text" placeholder="surname" value={surname} onChange={(e) => setSurname(e.target.value)} required/>
+        <input className="input" type="text" placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
         <input className="input" type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
         <input className="input" type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
 

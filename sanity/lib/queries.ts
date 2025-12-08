@@ -20,7 +20,6 @@ export const USER_BY_ID_QUERY = defineQuery(
   imageUrl
 }`
 );
-
 export const MOVIE_BY_ID_QUERY = `
 *[_type == "movie" && _id == $id][0]{
   _id,

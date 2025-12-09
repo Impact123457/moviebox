@@ -12,11 +12,11 @@ export default async function Movies({searchParams}: {
     const {data: movies} = await sanityFetch({ query: MOVIE_QUERY, params});
     return(
     <>
-        <div className="max-w-[900px] mx-auto my-5 p-5">
-            
-            {/*<p>{querys ? 'Serch results for "${query}"' : 'Movies'}</p>*/}      
+        <div className="w-[900px] mx-auto my-5 p-5">
                 <div className="flex items-center justify-between">
-                    <p className="text-black font-bold text-[20px]">movies</p> 
+                <p className="text-black font-bold text-[20px]">
+                    {query ? `Search results for "${query}"` : 'Movies'}
+                </p>     
                     <SearchForm query={query}/>
                 </div>
                 

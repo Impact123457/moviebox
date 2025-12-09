@@ -3,13 +3,11 @@ import Image from "next/image"
 import { auth, signOut, signIn } from "@/auth";
 
 const Navbar = async() =>{   
-
     const session = await auth();//a je user prijavlen
-
     return(
         <header className="bg-white shadow-sm">
-            <nav className="flex justify-between items-center">
-                <div className="p-3">
+        <nav className="flex justify-between items-center">
+            <div className="p-3">
                     <Link href="/">
                         <Image src="/logo.png" alt="logo" width={90} height={90}></Image>
                     </Link>
@@ -27,7 +25,7 @@ const Navbar = async() =>{
                         }}>
                             <button type="submit" className="uppercase font-bold cursor-pointer">Log out</button>
                         </form>
-                        <Link href={`/user/${session?.user?.id}`}>
+                        <Link href={`/user/${session?.user.id}`}>
                             <Image src="/profile.png" alt="profile icon" width={40} height={40} className="rounded-full"/>
                         </Link>
                      </>
@@ -39,8 +37,8 @@ const Navbar = async() =>{
                         </>
                     )}
                 </div>
-            </nav>
-        </header>
+        </nav>
+    </header>
     )
 }
 export default Navbar;

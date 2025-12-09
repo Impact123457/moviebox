@@ -12,28 +12,29 @@ const Profile = async ({ params }: { params: { id: string } }) => {
     const user = await client.fetch(USER_BY_ID_QUERY, { id });
     const movie = await client.fetch(MOVIE_BY_ID_QUERY, { id });
     if (!user) return notFound();
-    //
-
     return(
         <>
-        <div className="max-w-[900px] mx-auto min-h-[550px] shadow-lg">
-            <div className="bg-amber-500 p-2">
-                <Image src={user.image} alt="pfp" width={100} height={150} className="m-3 border-2 border-black" />
-                <p>{user.username}</p>   
-                <p>{user.bio}</p>
+            <div className="max-w-[900px] my-5 mx-auto h-[530px] shadow-lg">
+                <div>
+                    <h1 className="m-5 font-bold text-2xl">{user.username}</h1> 
+                    <div className="flex p-2">
+                        <Image src={user.image} alt="pfp" width={100} height={100} className="rounded-full m-3 border-2 border-black object-cover" />
+                        <div>
+                            <p className="p-5 mt-3 w-[400px]">{user.bio}</p>
+                            <Link href="/edit" className="rounded bg-black text-white p-2 m-5">
+                            Edit profile
+                            </Link>
+                        </div>
+                    </div>
+                         
+                </div>
+                <div className="mt-5 items-center justify-center border font-bold border-black p-3 flex gap-5 bg-black text-white uppercase">
+                    <Link href="/liked">Favourites</Link>
+                    <Link href="/watched">Diary</Link>
+                    <Link href="/watchlist">Next watch</Link>
+                </div>
+                
             </div>
-
-            <div className="items-center justify-center border border-black p-3 flex gap-5 uppercase">
-                <Link href="/liked">Favourites</Link>
-                <Link href="/watched">Films</Link>
-                <Link href="/watchlist">Next watch</Link>
-                <Link href="/playlist">Play lists</Link>
-            </div>
-            
-            <Link href="/edit">
-                Edit profile
-            </Link>
-        </div>
         </>
     );
 }

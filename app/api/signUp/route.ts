@@ -1,53 +1,72 @@
-// /api/login/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { writeClient } from "@/sanity/lib/write-client";
+import { CHECK_FOR_EXISTING_USER } from "@/sanity/lib/queries";
+import fs from "fs";
+import path from "path";
+import { client } from "@/sanity/lib/client";
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, password } = await req.json();
+    const { name, email, password, surname, username } = await req.json();
 
-    if (!email || !password) {
+    if (!name || !surname || !username || !email || !password) {
       return NextResponse.json(
-        { error: "Email and password are required" },
+        { error: "All fields are required" },
         { status: 400 }
       );
     }
 
-    // Poišči uporabnika po emailu
-    const user = await writeClient.fetch(
-      `*[_type == "user" && email == $email][0]`,
-      { email }
-    );
+    // Preveri ali uporabnik že obstaja
+    const existingUser = await writeClient.fetch(CHECK_FOR_EXISTING_USER, { email });
 
-    if (!user) {
+    if (existingUser) {
       return NextResponse.json(
-        { error: "Invalid email or password" },
-        { status: 401 }
+        { error: "User already exists" },
+        { status: 400 }
       );
     }
 
-    // Preveri geslo
-    const isMatch = await bcrypt.compare(password, user.password);
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    if (!isMatch) {
-      return NextResponse.json(
-        { error: "Invalid email or password" },
-        { status: 401 }
-      );
+    const filePath = path.join(process.cwd(), "public", "defaultPFP.jpg");
+    const buffer = fs.readFileSync(filePath);
+
+    const imageAsset = await writeClient.assets.upload(
+    "image",
+    buffer,
+    { filename: "defaultPFP.jpg", contentType: "image/jpeg" }
+    )
+     console.log("Image asset:", imageAsset);
+    
+
+ const newUser = await writeClient.create({
+  _type: "user", 
+  name,
+  surname,
+  username,
+  email,
+  password: hashedPassword,
+  image: {
+    _type: 'image',
+    asset: {
+      _type: 'reference',
+      _ref: imageAsset._id,
     }
-
-    // Uspešna prijava
+  }
+});
     return NextResponse.json(
-      { message: "Login successful", userId: user._id, username: user.username },
-      { status: 200 }
+      { message: "User created successfully", userId: newUser._id },
+      { status: 201 }
     );
-
   } catch (error) {
-    console.error("Login error:", error);
+    console.error(error);
+    console.error("Register error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
+      
     );
   }
 }

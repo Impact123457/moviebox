@@ -8,9 +8,10 @@ const MoviePage = ({movie}: {movie: MovieTypeCard}) => {
     return(
         <li className="w-[150] h-[210] overflow-hidden">
                 <Link href={`/movies/${movie._id}`}>
-                    <Image src={movie.image} alt={movie.name} width={150} height={210} className="object-cover"/>
+                {/* @ts-ignore */}
+                    <Image src={movie.image} alt={movie.name || "poster"} width={150} height={210} className="object-cover"/>
                 </Link>
         </li>
     )
 }
-export default MoviePage
+export default MoviePage;

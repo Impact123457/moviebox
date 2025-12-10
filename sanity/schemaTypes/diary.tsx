@@ -1,4 +1,4 @@
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity';
 
 export const diary = defineType({
   name: 'diary',
@@ -9,6 +9,10 @@ export const diary = defineType({
       name: 'user',
       type: 'reference',
       to: {type: 'user'},
+    }),
+    defineField({
+      name: 'date',
+      type: 'date',
     }),
     defineField({
       name: 'movies',

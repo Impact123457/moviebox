@@ -3,11 +3,14 @@ import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import Link from "next/link";
 
+interface Genre {
+  _id: string;
+  name: string;
+}
 export default async function MoviePage(props: { params: Promise<{ id: string }> }) {
-  
   const { id } = await props.params;   
   //if (!id) return <p>Invalid movie ID.</p>;
-  const movie = await client.fetch(MOVIE_BY_ID_QUERY, { id });
+  const movie  = await client.fetch(MOVIE_BY_ID_QUERY, { id });
   //if (!movie) return <p>Movie not found.</p>;
 
   return (
@@ -23,7 +26,7 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
             <div className="flex">
               <p>{movie.release}</p>
               <p className="mx-2">Directed by: <Link href="/" className="">{movie.director.name}{movie.director.surname}</Link></p>
-              <p className="mx-2">Genre: {movie.genre.name}</p>
+              <p className="mx-2">Genre: {movie.genre?.map((g: Genre) => g.name).join(", ") || "Unknown"}</p>
             </div>
           <p className="mt-4 max-w-[400px]">{movie.description}</p>
           <div className="shadow-lg max-w-[200px] h-[50px] justify-between mt-3 flex">

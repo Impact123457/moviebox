@@ -27,8 +27,8 @@ export const movie = defineType({
     }),
     defineField({
       name: 'genre',
-      type: 'reference',
-      to: {type: 'genre'},
+      type: 'array',
+      of: [{type: 'reference', to: [{ type: 'genre' }]}]
     }),
     defineField({
       name: 'director',

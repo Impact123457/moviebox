@@ -12,16 +12,15 @@ export const USER_BY_GITHUB_ID_QUERY = defineQuery(
 );
 export const USER_BY_ID_QUERY = defineQuery(
    `*[_type == "user" && _id == $id][0]{
-  _id,  
-  name,
-  surname,
+ surname,
   username,
   bio,
   email,
   password,
-  "image": image.asset->url,
-}`
-);
+  "im _id,  
+  name,
+  age": image.asset->url,
+}`);
 export const USER_BY_EMAIL_QUERY = defineQuery(
    `*[_type == "user" && email == $email][0]{
   _id,  
@@ -42,10 +41,10 @@ export const MOVIE_BY_ID_QUERY = `
   title,
   release,
   description,
-  genre->{
+   genre[]->{
     _id,
     name
-  },
+    },
   director->{
     name,
     surname
@@ -66,6 +65,46 @@ export const MOVIE_QUERY =
     },
     "image": image.asset->url,
   }`);
+  
+export const LIKED_MOVIE = (userId: string) => `*[_type == "liked" && user._ref == "${userId}"]{
+  movies[]->{
+    _id,
+    name,
+    title,
+    release,
+    description,
+    "image": image.asset->url,
+    "genre": genre[]->name,
+    "director": director->name
+  }
+}`
+
+export const WATCHED_MOVIE = (userId: string) => `*[_type == "watched" && user._ref == "${userId}"]{
+  movies[]->{
+    _id,
+    name,
+    title,
+    release,
+    description,
+    "image": image.asset->url,
+    "genre": genre[]->name,
+    "director": director->name
+  }
+}`
+
+export const SEEN_MOVIE = (userId: string) => `*[_type == "diary" && user._ref == "${userId}"]{
+  movies[]->{
+    _id,
+    name,
+    title,
+    release,
+    description,
+    "image": image.asset->url,
+    "genre": genre[]->name,
+    "director": director->name
+  }
+}`
+
 export const USER_QUERY = 
   defineQuery(`*[_type == "movie"]{
     _id,

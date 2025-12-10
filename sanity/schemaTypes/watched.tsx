@@ -16,10 +16,10 @@ export const watched = defineType({
       of: [{type: 'reference', to: [{ type: 'movie' }]}]
     }),
 ],
-preview:{
+preview: {
     select: {
-       title: 'name', 
+      title: 'title',
     }
-    }
+  }
 })
     

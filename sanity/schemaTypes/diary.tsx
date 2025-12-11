@@ -11,10 +11,6 @@ export const diary = defineType({
       to: {type: 'user'},
     }),
     defineField({
-      name: 'date',
-      type: 'date',
-    }),
-    defineField({
       name: 'movies',
       type: 'array',
       of: [{type: 'reference', to: [{ type: 'movie' }]}]

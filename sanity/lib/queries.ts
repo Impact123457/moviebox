@@ -12,14 +12,13 @@ export const USER_BY_GITHUB_ID_QUERY = defineQuery(
 );
 export const USER_BY_ID_QUERY = defineQuery(
    `*[_type == "user" && _id == $id][0]{
- surname,
+  surname,
   username,
   bio,
   email,
-  password,
-  "im _id,  
+  password,  
   name,
-  age": image.asset->url,
+  "image": image.asset->url,
 }`);
 export const USER_BY_EMAIL_QUERY = defineQuery(
    `*[_type == "user" && email == $email][0]{

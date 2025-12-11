@@ -17,7 +17,7 @@ const Profile = async ({ params }: { params: { id: string } }) => {
                 <div>
                     <h1 className="m-5 font-bold text-2xl">{user.username}</h1> 
                     <div className="flex p-2">
-                        <Image src={user.image || "/defaultPFP.png"} alt="pfp" width={100} height={100} className="rounded-full m-3 border-2 border-black object-cover" />
+                        <Image src={user.image || "/defaultPFP.jpg"} alt="pfp" width={100} height={100} className="rounded-full m-3 border-2 border-black object-cover" />
                         <div>
                             <p className="p-5 mt-3 w-[400px]">{user.bio}</p>
                             <Link href="/edit" className="rounded bg-black text-white p-2 m-5">

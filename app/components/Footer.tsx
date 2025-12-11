@@ -9,20 +9,21 @@ const Footer = () =>{
                         <Image src="/logo.png" alt="logo" width={90} height={90} />
                     </Link>
                 </div>
-                <div className="flex items-center text-black w-[600px] text-center">
+                <div className="flex items-center text-black md:w-[600px] w-[200px] text-[10px] text-center">
                     <p>
                         Keep track of everything you watch, create custom playlists, 
                         save your favorites, and organize your “must-watch” list for the next movie night.
                     </p>
                 </div>
-                <div className="flex items-right text-black w-[200px]">
+                <div className="flex items-right text-black md:w-[200px] text-[10px] w-[10s0px]">
                     <p>Contact information: 
                     <br></br>  
-                    movieBox.info@gmail.com
+                    movieBox@gmail.com
                     <br></br> 
                     +368 098 123 333
                     </p>
                 </div>
+                
             </div>
         </section>
     )

@@ -46,3 +46,4 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
   </>
   );
 }
+

@@ -11,6 +11,7 @@ const Profile = async ({ params }: { params: { id: string } }) => {
 
     const user = await client.fetch(USER_BY_ID_QUERY, { id });
     if (!user) return notFound();
+
     return(
         <>
             <div className="max-w-[900px] my-5 mx-auto h-[530px] shadow-lg">

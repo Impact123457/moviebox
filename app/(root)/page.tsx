@@ -3,7 +3,7 @@ import {auth} from "@/auth";
 export default async function Home() {
   return (
   <>
-  <div className="flex">
+  <div className="flex md:flex-row">
     <div className="divH1">
       <h1 className="heading">Welcome to MovieBox</h1>
         <p className="opis">
@@ -17,18 +17,14 @@ export default async function Home() {
           <b>- Happy scrolling and may the force be with you!</b>
         </p>
     </div>
-
     <div className="divImg">
-        <Image src="/r2d2&c3po.png" alt="droids" width={400} height={400}/>
+      <Image src="/r2d2&c3po.png" alt="droids" width={400} height={400}/>
     </div>  
 
   </div>
   <section className="bg-black text-primary py-5">
-
       <h2 className="h2">WE OFFER YOU</h2>
-
       <div className="karticeDIV">
-
         <div className="kartica">
           <div className="p-3">
             <h3 className="h3">Liking movies</h3>

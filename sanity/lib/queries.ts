@@ -14,6 +14,7 @@ export const USER_BY_GITHUB_ID_QUERY = defineQuery(
 export const USER_BY_ID_QUERY = defineQuery(
    `*[_type == "user" && _id == $id][0]{
   _id,
+  id,
   surname,
   username,
   bio,

@@ -16,12 +16,12 @@ export default async function edit(){
     const movie = seen?.[0]?.movies || [];
         
     if (!movie || movie.length === 0) {
-        return <p className="text-center">You havent watched any movies yet.</p>;
+        return <div className="md:w-[900px] h-[550px] mx-auto flex items-center justify-center"><p className="text-center p-5">Start planing your next watch!!</p></div>
     }
     return(
-        <section className="mt-5 shadow-lg w-[900px] mx-auto min-h-[520px]">
+        <section className="mt-5 shadow-lg md:w-[900px] mx-auto min-h-[520px]">
             <div>
-                <h2 className="text-black p-2 font-bold text-[20px]">Pick your next watch:</h2>
+                <h2 className="text-black p-3 font-bold text-[20px]">Pick your next watch:</h2>
                 <hr className="border border-black mb-1 shadow-lg" /> 
                 <ul className="cardDiv">
                     {movie.map((movie: any) => (

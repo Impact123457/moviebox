@@ -14,15 +14,15 @@ const Profile = async ({ params }: { params: { id: string } }) => {
 
     return(
         <>
-            <div className="max-w-[900px] my-5 mx-auto h-[530px] shadow-lg">
+            <div className="md:w-[900px] w-[400px] my-5 mx-auto h-[530px] shadow-lg">
                 <div>
                     <h1 className="m-5 font-bold text-2xl">{user.username}</h1> 
                     <div className="flex p-2">
                         <Image src={user.image || "/defaultPFP.jpg"} alt="pfp" width={100} height={100} className="rounded-full m-3 border-2 border-black object-cover" />
                         <div>
-                            <p className="p-5 mt-3 w-[400px]">{user.bio}</p>
+                            <p className="p-5 mt-3 md:w-[400px]">{user.bio}</p>
                             <Link href="/edit" className="rounded bg-black text-white p-2 m-5">
-                            Edit profile
+                                Edit profile
                             </Link>
                         </div>
                     </div>

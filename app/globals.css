@@ -71,13 +71,13 @@ justify-between - 1. element da na levo 2. na desno(če jih je več jih enakomir
     @apply border cursor-pointer w-full p-2 rounded;
   }
   .cardDiv{
-   @apply p-5 mb-5 flex-wrap gap-4 flex max-h-fit max-w-7xl;
+   @apply p-5 mb-5 md:justify-start justify-center flex-wrap gap-4 flex max-h-fit md:w-[900px];
   }
   .img:hover{
     @apply border-3 border-black;
   }
   .SearchForm{
-    @apply bg-white mx-5 mb-2 border-2 border-black p-3 w-[300px] h-[50px] rounded-lg flex items-center justify-between gap-2;
+    @apply bg-white mx-5 mb-2 border-2 border-black p-3 md:w-[300px] md:h-[50px] h-[40px] rounded-lg flex items-center justify-between gap-2;
   }
   .submit:hover{
     @apply cursor-pointer;

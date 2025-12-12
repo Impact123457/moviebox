@@ -16,12 +16,12 @@ export default async function liked(){
     const movie = liked?.[0]?.movies || [];
 
     if (!movie || movie.length === 0) {
-    return <p className="text-center">You have no liked movies yet.</p>;
+         return <div className="md:w-[900px] h-[550px] mx-auto flex items-center justify-center"><p className="text-center p-5">You have no liked movies yet!!</p></div>
     }
     return(
-        <section className="mt-5 shadow-lg w-[900px] mx-auto min-h-[520px]">
+        <section className="mt-5 shadow-lg md:w-[900px]  mx-auto min-h-[520px]">
             <div>
-                <h2 className="text-black p-2 font-bold text-[20px]">Your personal favorites</h2>
+                <h2 className="text-black p-3 font-bold md:text-[20px]">Your personal favorites</h2>
                 <hr className="border border-black mb-1 shadow-lg" /> 
                 <ul className="cardDiv">
                     {movie.map((movie: any) => (

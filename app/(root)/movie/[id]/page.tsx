@@ -2,7 +2,9 @@ import { MOVIE_BY_ID_QUERY } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import Link from "next/link";
-
+import Liked from "@/app/components/Liked";
+import Watched from "@/app/components/Watched";
+import WatchList from "@/app/components/WatchList";
 interface Genre {
   _id: string;
   name: string;
@@ -12,7 +14,6 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
   //if (!id) return <p>Invalid movie ID.</p>;
   const movie  = await client.fetch(MOVIE_BY_ID_QUERY, { id });
   //if (!movie) return <p>Movie not found.</p>;
-
   return (
   <>
     <div className="p-5 my-5 shadow-lg md:w-[900px] mx-auto h-[520px]">
@@ -30,15 +31,9 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
             </div>
           <p className="mt-4 md:w-[400px]">{movie.description}</p>
           <div className="shadow-lg md:w-[200px] md:h-[50px] w-[150px] justify-between mt-3 flex">
-            <button className="cursor-pointer mx-3">
-              <Image src="/heart.png" alt="heart" width={30} height={30}></Image>
-            </button>
-            <button className="cursor-pointer">
-              <Image src="/didntView.png" alt="didntView" width={30} height={30}></Image>
-            </button>
-            <button className="cursor-pointer mx-3">
-              <Image src="/watchList.png" alt="watch" width={30} height={30}></Image>
-            </button>
+            <Liked />
+            <Watched />
+            <WatchList />
           </div>
         </div>  
       </div>

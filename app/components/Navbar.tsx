@@ -14,7 +14,7 @@ const Navbar = async() =>{
             </div>
             <div className="mx-3 flex items-center gap-5 text-black uppercase font-bold text-[15px]">
                 {session && session?.user ?(
-                    <> 
+                <> 
                     <Link href="/movies">
                         <span>Movies</span>
                     </Link>
@@ -30,10 +30,10 @@ const Navbar = async() =>{
                     </>
                     ):(
                     <>
-                        <Link href="/login">
-                            <button type="submit" className="uppercase font-bold cursor-pointer">Log in</button>
-                        </Link>
-                    </>
+                    <Link href="/login">
+                        <button type="submit" className="uppercase font-bold cursor-pointer">Log in</button>
+                    </Link>
+                </>
                 )}
             </div>
         </nav>

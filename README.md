@@ -1,12 +1,13 @@
 # 🎬 movieBox
----
 ![Status](https://img.shields.io/badge/status-in--development-yellow.svg)
 ![Issues](https://img.shields.io/github/issues/zuranmateo/forvalorofficial.svg)
 ![PRs](https://img.shields.io/github/issues-pr/zuranmateo/forvalorofficial.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ---
 
-movieBox je spletna aplikacija za vse ljubitelje filmov, ki omogoča enostavno spremljanje filmov, ki si jih želiš ogledati, si jih že ogledal ali so ti bili posebej všeč. Uporabniki lahko raziskujejo filme, si ogledajo njihove podrobnosti in si ustvarijo svojo osebno filmsko zbirko.
+Spletna stran movieBox.
+Uporabniku omogoče pregled filmov, ki jih je že pogledal, ki so mu bili všeč in ki si jih še želi pogledati.
+
 ---
 
 ## 📝 Kazalo
@@ -28,7 +29,7 @@ movieBox je spletna aplikacija za vse ljubitelje filmov, ki omogoča enostavno s
   - opisom (description)
   - režiserjem (director)
   - žanri (genres)
-
+---
 ## 🏁 Kako začeti
 
 ### Predpogoji
@@ -45,6 +46,7 @@ movieBox je spletna aplikacija za vse ljubitelje filmov, ki omogoča enostavno s
 1. Kloniraj projekt:
 
 ```git clone``` [movieBox](https://github.com/Impact123457/moviebox)
+
 2. Namesti odvisnosti:
 
         npm install

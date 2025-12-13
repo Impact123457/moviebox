@@ -5,8 +5,11 @@ import { USER_BY_ID_QUERY } from "@/sanity/lib/queries";
 import { User } from "@/sanity/types";
 import Update from "@/app/components/Update";
 
-export type UserType = Omit<User, "name" | "email" | "image" | "imageUrl"> & {
+export type UserType = Omit<User, "name" | "surname" | "username" | "bio" | "email" | "image" | "imageUrl"> & {
     name?: string | undefined;
+    surname?: string | undefined;
+    username?: string | undefined;
+    bio?: string | undefined;
     email?: string | undefined;
     image?: string | undefined;
     imageUrl?: string | undefined;

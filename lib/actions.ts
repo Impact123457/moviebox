@@ -12,7 +12,7 @@ export const UpdateProfile= async (state: any, form: FormData, _id: string) =>{
         status: 'Error',
 
     });
-    const name = form.get("name") as string;
+    const username = form.get("username") as string;
     const bio = form.get("bio") as string;
     let file = form.get("file") as File | null;
 
@@ -29,7 +29,7 @@ export const UpdateProfile= async (state: any, form: FormData, _id: string) =>{
             });
 
                 result = await writeClient.patch(_id).set({
-                name,
+                username,
                 bio,
                 image: {
                     _type: 'image',
@@ -42,7 +42,7 @@ export const UpdateProfile= async (state: any, form: FormData, _id: string) =>{
         }
         else{
             result = await writeClient.patch(_id).set({
-            name,
+            username,
             bio,
             }).commit();
         } 

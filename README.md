@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎬 movieBox
+---
 
-## Getting Started
+movieBox je spletna aplikacija za vse ljubitelje filmov, ki omogoča enostavno spremljanje filmov, ki si jih želiš ogledati, si jih že ogledal ali so ti bili posebej všeč.
 
-First, run the development server:
+Uporabniki lahko raziskujejo filme, si ogledajo njihove podrobnosti in si ustvarijo svojo osebno filmsko zbirko.
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Status](https://img.shields.io/badge/status-in--development-yellow.svg)
+![Issues](https://img.shields.io/github/issues/zuranmateo/forvalorofficial.svg)
+![PRs](https://img.shields.io/github/issues-pr/zuranmateo/forvalorofficial.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📝 Kazalo
+- [About](#about)
+- [Getting Started](#getting_started)
+- [Deployment](#deployment)
+- [Usage](#usage)
+- [Built Using](#built_using)
+- [TODO](#todo)
+- [Authors](#authors)
+- [Acknowledgements](#acknowledgement)
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Funkcionalnosti
+- 📌 **Watch List** – seznam filmov, ki si jih uporabnik želi ogledati  
+- 📖 **Diary** – evidenca filmov, ki jih je uporabnik že pogledal  
+- ❤️ **Liked Movies** – filmi, ki so uporabniku posebej všeč  
+- 🎥 **Podrobnosti o filmih**, vključno z:
+  - opisom (description)
+  - režiserjem (director)
+  - žanri (genres)
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🏁 Kako začeti
 
-## Learn More
+### Predpogoji
+Če želiš projekt poganjati lokalno, potrebuješ:
 
-To learn more about Next.js, take a look at the following resources:
+Node.js (LTS)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+npm ali pnpm
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Git
 
-## Deploy on Vercel
+### Nameščanje
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Kloniraj projekt:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```git clone``` [movieBox](https://github.com/Impact123457/moviebox)
+2. Namesti odvisnosti:
+        npm install
+    ali:
+
+        pnpm install
+3. Zaženi development server:
+
+        npm run dev
+    ali:
+        pnpm dev
+---
+
+## ⛏️ Tehnologije in orodja
+- **Next.js**
+- **TypeScript**
+- **Sanity CMS**
+- **TailwindCSS**
+- **Node.js**
+- **NextAuth**
+- **GitHub**
+- **Vercel**
+- **shadcn/ui**
+---
+## 🧑‍💻Uporaba
+
+1. Uporabnik lahko brska po filmih.
+2. Pri vsakem filmu so na voljo podrobne informacije.
+3. Filme lahko:
+    - doda na **Watch List**
+    - označi kot ogledane (**Diary**)
+    - označi kot všečkane (**Liked Movies**)
+4. Uporabnik ima vedno pregled nad svojo osebno filmsko statistiko.
+5. Uporabnik lahko ureja svoje:
+    - uporabniško ime
+    - profilno sliko
+    - svoj bio
+---
+### Kako kaj?
+
+#### Kako se prijaviti
+
+prijaviš se lahko na strani ```/login```. Zgoraj desno v navigacijski vrstici se nahaja. Nato lahko greste na registracijo, ki je na dnu okna za prijavo. Če se želite se lahko prijavite z emailom in geslom, če pa se želite prijaviti z Github profilom, se s tem lahko prijavite na strani za prijavo.
+
+#### Kako dodajati filme na watch list, diary ali med liked filme
+
+na strani *Movies* so izpisai vsi filmi, na đeljeni film kliknete in ste na strani kjer vidite vse podatke o filmu, pod opisom filma so trije gumbi 1. srce(liked filmi), 2. oko(diary) in 3. list(watch list), s tem ko stisnete na gumb se film doda na željeni list, in da ga vzamete z lista še enkrat stisnete na gumb.
+
+#### Kako urejati profil
+
+da uredite profil imate na strani kjer se izpiše vaš profil gumb *Edit profile*, ko stisnete na ta gumb se znajdete na novi strani z vpisnimi polji, kjer vpišete željene podatke in nato shranite spremembe.
+***V kolikor ste prijavljeni z Github profilom, urejanje profila ni mogoča***
+
+---
+
+## 🚀Nadaljnje izboljšave
+
+- Uporabniški računi
+- Ocene filmov
+- Filtriranje po žanrih
+- Možnost odstanjevanja filmov iz lista
+
+---
+
+## ✍️Avtorica
+
+- **Ema Škruba** – Avtorica in razvijalka  
+  - GitHub: https://github.com/Impact123457
+
+---
+## 🎉Dodatno
+
+- **Inspiracija:** Projekt izhaja iz podobne aplikacije *movieBoxd* 
+- **Mentor:** Samo Železnik  
+- **Avtentikacija:** Implementirano z **NextAuth**.  
+- **Open-source community:** Next.js, Sanity, TailwindCSS, shadcn/ui, Vercel.

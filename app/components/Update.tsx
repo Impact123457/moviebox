@@ -1,35 +1,137 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { useState, useActionState } from "react";
+import { useState, useActionState } from 'react';
+import { profileSchema } from "@/lib/validation";
+import { z } from 'zod';
+import { useRouter } from "next/navigation";
+import { EditAuthorType } from "@/app/(root)/user/editProfile/[id]/page";
+import { Edit, Send } from "lucide-react";
+import { UpdateProfile } from "@/lib/actions";
+import { signOut } from "next-auth/react";
 
-const Update = ({ user }: { user?: any }) => {
-    const handleFormSubmit = () =>{};
-    const [error, setErrors] = useState<Record<string,string>>({});
-    const [state, formAction, save] = useActionState(handleFormSubmit, 
-    {
-        error: '', 
-        status: 'INITIAL',
-    });
+export default function EditProfileForm({user}: {user: EditAuthorType}){
+
+    const [errors, setErrors] = useState<Record<string, string>>({});
+
+    const [name, setName] = useState(user.name || "");
+    const [bio, setBio] = useState(user.bio || "");
+    const [file, setFile] = useState(user.image);
+
+    function handleFile(file: File) {
+        const url = URL.createObjectURL(file); // takoj dobiš preview
+    setFile(url);
+  }
+
+    //console.log(user)
+    const router = useRouter();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleFormSubmit = async (prevState: any, formData: FormData) => {
+            try{
+                let formValues;
+                if(file == user.image){
+                    formValues = {
+                    name: formData.get("name") as string,
+                    bio: formData.get("bio") as string,
+                    }
+                }
+                else{
+                    formValues = {
+                    name: formData.get("name") as string,
+                    bio: formData.get("bio") as string,
+                    file: formData.get("file") as File
+                    }
+                }
     
-    return(
-    <div className="signForms">
-        <h2 className="text-2xl text-black font-semibold text-center m-5">Edit your profile</h2>
-            <form action={""} className="space-y-3">
-                <label htmlFor="username">Username:</label>
-                    <input id="username" type="text" name="username" placeholder={user?.name || "Enter your username"} className="input" />
-                {error.username && <p className="">{error.username}</p>}
-                <label htmlFor="image">Image:</label>
-                    <input id="image" type="file" name="image" accept="image/*" className="input" />
-                {error.image && <p className="">{error.image}</p>}
-                <label htmlFor="bio">Bio:</label>
-                    <textarea id="bio" className="input" name="bio" placeholder="Enter your bio" />
-                {error.bio && <p className="">{error.bio}</p>}
-                <button type="submit" disabled={save} className="border w-full cursor-pointer p-2 rounded bg-black text-white my-2">
-                    {save ? 'Saving...' : 'Save changes'}    
-                </button>    
-            </form>
-    </div>
-    )
+                await profileSchema.parseAsync(formValues);
+    
+                //console.log("\n \n \n \n \n",name, email, file, "\n \n \n \n \n");
+                
+                const result = await UpdateProfile(prevState, formData, user._id);
+                
+                if(result.status == 'SUCCESS'){
+                    toast.success("Your profile was updated succesfully, please log in again")
+                }
+                await signOut();
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                router.push(`/comments`);
+            }
+            catch (error){
+                if(error instanceof z.ZodError){
+                    const fieldErrors = error.flatten().fieldErrors;
+                    
+                    setErrors(fieldErrors as unknown as Record<string, string>);
+                    
+                    console.log("\n \n \n \n \n",error , "\n \n \n \n \n");
+
+                    toast.error("Please check your inputs and try again");
+    
+                    return {...prevState, error: 'Updating failed', status:'ERROR'};
+                }
+    
+                toast.error("Unexpected error");
+                return {...prevState, error: 'unexpected error', status: 'ERROR'};
+            } 
+        };
+
+    const [state, formAction, isPending] = useActionState(handleFormSubmit,
+        {
+        error : '',
+        status: 'INITIAL',
+        }
+    );
+
+  return (
+    <form action={formAction} className="editProfile-form">
+        <h3 className="text-textprimary text-5xl mb-4 text-center font-cardinal">
+            Edit profile
+        </h3>
+        <div className='comment-form-part'>
+            <label htmlFor="name" className='comment-form-label'>name</label>
+            <input 
+                id='name'
+                name='name'
+                className='Comment-form-input'
+                placeholder='name'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+            />
+            {errors.title && <p className='comment-form-error'>{errors.title}</p>}
+        </div>
+        <div className='comment-form-part'>
+            <label htmlFor="bio" className='comment-form-label'>bio</label>
+            <input 
+                id='bio'
+                name='bio'
+                className='Comment-form-input'
+                placeholder='bio'
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+            />
+            {errors.title && <p className='comment-form-error'>{errors.title}</p>}
+        </div>
+        <div className='mt-2'>
+            <label htmlFor="file" className='comment-form-label'>image</label>
+            <div className="relative w-fit mx-4 mt-3">
+                <div className="w-[100px] h-[100px] rounded-full" style={{backgroundImage: `url('${file}')`, backgroundSize: 'cover', backgroundPosition: 'center'}}></div>
+                <input 
+                    type='file'
+                    id='file'
+                    accept=".png,.jpg,.jpeg"
+                    name='file'
+                    className='w-[100px] h-[100px] items-center px-3 py-2 text-sm border-3 absolute inset-0 text-transparent border-textprimary hover:bg-black/50 rounded-full'
+                    placeholder='file'
+                    onChange={(e) => {
+                    const f = e.target.files?.[0];
+                    if (f) handleFile(f);
+                    }}
+                />
+            </div>
+            {errors.title && <p className='comment-form-error'>{errors.title}</p>}
+        </div>
+        <button type='submit' className='comment-form-btn' disabled={isPending}>
+            {isPending ? 'Submitting...' : 'Update profile'} <Send className='size-6 ml-2 mt-1' />
+        </button>
+    </form>
+  )
 }
-export default Update;

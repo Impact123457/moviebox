@@ -4,12 +4,12 @@ import { useState, useActionState } from 'react';
 import { profileSchema } from "@/lib/validation";
 import { z } from 'zod';
 import { useRouter } from "next/navigation";
-import { EditAuthorType } from "@/app/(root)/user/editProfile/[id]/page";
-import { Edit, Send } from "lucide-react";
+import { UserType } from '../(root)/user/editProfile/[id]/page';
 import { UpdateProfile } from "@/lib/actions";
 import { signOut } from "next-auth/react";
+import { toast } from "sonner";
 
-export default function EditProfileForm({user}: {user: EditAuthorType}){
+export default function Update({user}: {user: UserType}){
 
     const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -130,7 +130,7 @@ export default function EditProfileForm({user}: {user: EditAuthorType}){
             {errors.title && <p className='comment-form-error'>{errors.title}</p>}
         </div>
         <button type='submit' className='comment-form-btn' disabled={isPending}>
-            {isPending ? 'Submitting...' : 'Update profile'} <Send className='size-6 ml-2 mt-1' />
+            {isPending ? 'Submitting...' : 'Update profile'}
         </button>
     </form>
   )

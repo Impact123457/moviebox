@@ -20,7 +20,7 @@ const Profile = async ({ params }: { params: { id: string } }) => {
                     <Image src={user.image || "/defaultPFP.jpg"} alt="pfp" width={100} height={100} className="rounded-full m-3 border-2 border-black object-cover" />
                     <div>
                         <p className="p-5 mt-3 md:w-[400px]">{user.bio}</p>
-                        <Link href="/edit" className="rounded bg-black text-white p-2 m-5">
+                        <Link href={`./editProfile/${user?._id}`} className="rounded bg-black text-white p-2 m-5">
                             Edit profile
                         </Link>
                     </div>

@@ -70,7 +70,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const user = await client.fetch(USER_BY_GITHUB_ID_QUERY, {
           id: profile?.id,
         });
-
+        token.provider = "github";
         token.id = user?._id;
         token.imageUrl = user?.imageUrl;
       }
@@ -79,13 +79,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           id: id,
         });
         token.id = user?._id;
+        token.provider = "credentials";
       }
-      
       return token;
     },
 
     async session({ session, token }){
-      Object.assign(session.user, {id: token.id, imageUrl: token.imageUrl,});
+      Object.assign(session.user, {id: token.id, imageUrl: token.imageUrl, provider: token.provider});
       return session;
     },
   }

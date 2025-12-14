@@ -119,3 +119,15 @@ export const USER_QUERY =
     password,
     "image": image.asset->url,
   }`);
+
+  export const LIKE_BY_USER_ID_QUERY = defineQuery(`
+    *[_type == "liked" && user._ref == $userId][0]
+  `);
+
+  export const LIKE_BY_MOVIE_USER_ID_QUERY = defineQuery(`
+    *[
+  _type == "liked" &&
+  references($id) &&
+  user._ref == $userId
+][0]
+  `)

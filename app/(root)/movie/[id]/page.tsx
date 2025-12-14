@@ -1,19 +1,29 @@
-import { MOVIE_BY_ID_QUERY } from "@/sanity/lib/queries";
+import { LIKE_BY_MOVIE_USER_ID_QUERY, MOVIE_BY_ID_QUERY } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import Link from "next/link";
 import Liked from "@/app/components/Liked";
 import Watched from "@/app/components/Watched";
 import WatchList from "@/app/components/WatchList";
+import { auth } from "@/auth";
+import { SanityLive } from "@/sanity/lib/live";
 interface Genre {
   _id: string;
   name: string;
 }
 export default async function MoviePage(props: { params: Promise<{ id: string }> }) {
+  const session = await auth();
+  const userId = session?.user.id;
   const { id } = await props.params;   
   //if (!id) return <p>Invalid movie ID.</p>;
   const movie  = await client.fetch(MOVIE_BY_ID_QUERY, { id });
   //if (!movie) return <p>Movie not found.</p>;
+  const like = await client.fetch(LIKE_BY_MOVIE_USER_ID_QUERY,{
+    id,
+    userId,
+  })
+  const likeId = like?._id;
+  console.log(likeId)
   return (
   <>
     <div className="p-5 my-5 shadow-lg md:w-[900px] mx-auto h-[520px]">
@@ -31,13 +41,14 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
             </div>
           <p className="mt-4 md:w-[400px]">{movie.description}</p>
           <div className="shadow-lg md:w-[200px] md:h-[50px] w-[150px] justify-between mt-3 flex">
-            <Liked />
+            <Liked id={id} likeId={likeId}/>
             <Watched />
             <WatchList />
           </div>
         </div>  
       </div>
     </div>
+    <SanityLive />
   </>
   );
 }

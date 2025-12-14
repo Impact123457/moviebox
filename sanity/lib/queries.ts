@@ -126,8 +126,32 @@ export const USER_QUERY =
 
   export const LIKE_BY_MOVIE_USER_ID_QUERY = defineQuery(`
     *[
-  _type == "liked" &&
-  references($id) &&
-  user._ref == $userId
-][0]
+      _type == "liked" &&
+      references($id) &&
+      user._ref == $userId
+     ][0]
+  `)
+
+  export const WATCHED_BY_USER_ID_QUERY = defineQuery(`
+    *[_type == "diary" && user._ref == $userId][0]
+  `);
+
+  export const WATCHED_BY_MOVIE_USER_ID_QUERY = defineQuery(`
+    *[
+      _type == "diary" &&
+      references($id) &&
+      user._ref == $userId
+     ][0]
+  `)//če je pravi user in če je že v arrayu
+
+  export const WATCHLIST_BY_USER_ID_QUERY = defineQuery(`
+    *[_type == "watch" && user._ref == $userId][0]
+  `);
+
+  export const WATCHLIST_BY_MOVIE_USER_ID_QUERY = defineQuery(`
+    *[
+      _type == "watch" &&
+      references($id) &&
+      user._ref == $userId
+     ][0]
   `)

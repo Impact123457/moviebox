@@ -1,42 +1,38 @@
-"use client"
+"use client" // da lahk uporablam npr. useState, useAction, StateuseRouter
 
 import { useActionState, useState } from "react";
+//useState = za shranjevanje napak
+//useActionState = za upravljanje z async actions npr. server actions
 import { Heart } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import z from "zod";
 import { LikeMovie } from "@/lib/actions";
-const Liked = ({id, likeId}: {id: string, likeId: string | null}) => {
 
-    const [errors, setErrors] = useState<Record<string, string>>({});
-    const router = useRouter();
+const Liked = ({id, likeId}: {id: string, likeId: string | null}) => {
+    const [errors, setErrors] = useState<Record<string, string>>({});//shranjuje napake
+    const router = useRouter();//navigacija
 
     const handleFormSubmit2 = async () => {
             try{
-                //console.log("\n \n \n \n \n",name, email, file, "\n \n \n \n \n");
-                const result = await LikeMovie(id);
-                
+                const result = await LikeMovie(id);//doda al odstrani like
                 if(result.status == 'SUCCESS'){
-                    toast.success("Liked movie")
+                    toast.success("Liked movie.")
                 }
                 else if(result.status == 'SUCCESSdislike'){
-                    toast.success("Disliked movie")
+                    toast.success("Disliked movie.")
                 }
                 router.push("");
             }
             catch (error){
-                if(error instanceof z.ZodError){
-                    const fieldErrors = error.flatten().fieldErrors;
-                    
-                    setErrors(fieldErrors as unknown as Record<string, string>);
-                    
-                    //console.log("\n \n \n \n \n",title , "\n \n \n \n \n");
+                if(error instanceof z.ZodError){//če preverjanje podatkov na strežniku ne uspe
 
+                    const fieldErrors = error.flatten().fieldErrors;
+                    setErrors(fieldErrors as unknown as Record<string, string>);
                     toast.error("Failed to like a movie");
     
-                    return {error: 'liking failed', status:'ERROR'};
+                    return {error: 'Liking failed.', status:'ERROR'};
                 }
-    
                 toast.error("Unexpected error");
                 return {error: 'unexpected error', status: 'ERROR'};
             } 

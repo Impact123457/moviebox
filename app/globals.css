@@ -110,13 +110,13 @@ justify-between - 1. element da na levo 2. na desno(če jih je več jih enakomir
     @apply py-5 text-[15px] text-black max-w-3xl;
   }
   .h2{
-    @apply font-sans font-extrabold text-center md:text-[30px] text-[20px];
+    @apply text-white font-sans font-extrabold text-center md:text-[30px] text-[20px];
   }
   .karticeDIV{
    @apply flex justify-center items-center gap-6 h-[300px];
   }
   .kartica{
-    @apply bg-gray-950 rounded-lg overflow-hidden py-2 h-[220px] md:w-[250px] w-[125px];
+    @apply bg-gray-950 text-white  rounded-lg overflow-hidden py-2 h-[220px] md:w-[250px] w-[125px];
   } 
   .kartica:hover {
   @apply bg-gray-700;

@@ -18,6 +18,7 @@ const Navbar = async() =>{
                     <Link href="/movies">
                         <span>Movies</span>
                     </Link>
+
                     <form action={async() => {
                         "use server"
                         await signOut({redirectTo:"/"})
@@ -27,6 +28,9 @@ const Navbar = async() =>{
                     <Link href={`/user/${session?.user.id}`}>
                         <Image src="/profile.png" alt="profile icon" width={40} height={40} className="rounded-full"/>
                     </Link>
+                    <Link href="/liked">Favourites</Link>
+                    <Link href="/watched">Diary</Link>
+                    <Link href="/watchlist">Next watch</Link>
                     </>
                     ):(
                     <>

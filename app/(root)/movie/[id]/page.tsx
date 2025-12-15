@@ -53,7 +53,7 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
         </div>
 
         <div className="pt-5 md:w-[600px] w-[200px]">
-          <h1 className="font-bold md:text-[15px]">{movie.title}</h1>
+          <h1 className="font-bold md:text-[20px]">{movie.title}</h1>
             <div className="flex text-[15px] md:text-[15px]">
               <p>{movie.release}</p>
               <p className="mx-2">Directed by: <Link href="/" className="">{movie.director.name}{movie.director.surname}</Link></p>

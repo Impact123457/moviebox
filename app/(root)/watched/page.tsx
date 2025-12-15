@@ -21,7 +21,7 @@ export default async function watched(){
     return(
         <section className="mt-5 md:w-[900px] shadow-lg mx-auto min-h-[520px]">
             <div>
-                <h2 className="text-black p-3 font-bold text-[20px]">Already seen, ut why not again?</h2>
+                <h2 className="text-black p-3 font-bold text-[20px]">Already seen, but why not again?</h2>
                 <hr className="border border-black mb-1 shadow-lg" /> 
                 <ul className="cardDiv">
                     {movie.map((movie: any) => (

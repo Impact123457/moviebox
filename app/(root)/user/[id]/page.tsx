@@ -25,7 +25,7 @@ const Profile = async ({ params }: { params: { id: string } }) => {
                         <Link href={`./editProfile/${user?._id}`} className="rounded bg-black text-white p-2 m-5">
                             Edit profile
                         </Link>
-                        : ""}
+                        : "If you are logged in with GitHub you cannot edit your profile!!"}
                     </div>
                 </div>       
             </div>

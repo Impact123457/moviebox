@@ -15,7 +15,7 @@ const WatchList = ({id, watchId}: {id: string, watchId: string | null}) => {
                 try{
                     const result = await Watch_list(id);//doda al odstrani like
                     if(result.status == 'SUCCESS'){
-                        toast.success("Moie added to watch list.")
+                        toast.success("Movie added to watch list.")
                     }
                     else if(result.status == 'SUCCESSdislike'){
                         toast.success("Movie removed from watch list.")

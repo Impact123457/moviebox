@@ -15,7 +15,7 @@ const Watched = ({id, watchedId}: {id: string, watchedId: string | null}) => {
             try{
                 const result = await WatchedMovies(id);//doda al odstrani like
                 if(result.status == 'SUCCESS'){
-                    toast.success("Moie added to watched.")
+                    toast.success("Movie added to watched.")
                 }
                 else if(result.status == 'SUCCESSdislike'){
                     toast.success("Movie removed from watched.")

@@ -16,13 +16,20 @@ const Navbar = async() =>{
                 {session && session?.user ?(
                 <> 
                     <Link href="/movies">
-                        <span>Movies</span>
+                        Movies
                     </Link>
 
-                    
-                    <Link href="/liked">Favourites</Link>
-                    <Link href="/watched">Diary</Link>
-                    <Link href="/watchlist">Next watch</Link>
+                    <Link href="/liked">
+                        Favourites
+                    </Link>
+
+                    <Link href="/watched">
+                        Diary
+                    </Link>
+
+                    <Link href="/watchlist">
+                        Next watch
+                    </Link>
                     <form action={async() => {
                         "use server"
                         await signOut({redirectTo:"/"})

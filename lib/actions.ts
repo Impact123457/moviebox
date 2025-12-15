@@ -4,7 +4,9 @@ import { auth } from "@/auth"
 import { parseServerActionResponse } from "./utils";
 import { writeClient } from "@/sanity/lib/write-client";
 import { 
-    LIKE_BY_USER_ID_QUERY, LIKE_BY_MOVIE_USER_ID_QUERY, WATCHED_BY_MOVIE_USER_ID_QUERY, WATCHED_BY_USER_ID_QUERY  
+    LIKE_BY_USER_ID_QUERY, LIKE_BY_MOVIE_USER_ID_QUERY, 
+    WATCHED_BY_MOVIE_USER_ID_QUERY, WATCHED_BY_USER_ID_QUERY,
+    WATCHLIST_BY_MOVIE_USER_ID_QUERY, WATCHLIST_BY_USER_ID_QUERY,
 } from "@/sanity/lib/queries";
 
 //za update profile:
@@ -156,7 +158,7 @@ export const WatchedMovies = async (_id: string) =>{
     const session = await auth();
 
     if(!session) return parseServerActionResponse({
-        error: 'Not singed in',
+        error: 'Not singed in.',
         status: 'Error',
 
     });
@@ -205,6 +207,87 @@ export const WatchedMovies = async (_id: string) =>{
         else{
             result = await writeClient.create({
                 _type: "watched",
+                user: {
+                    _type: 'reference',
+                    _ref: userId,
+                },
+                movies: [
+                    {
+                        _type: 'reference',
+                        _ref: _id,
+                        _key: _id,
+                    }
+                ]
+            })
+        }
+        return parseServerActionResponse({
+            ...result,
+            error: '',
+            status: 'SUCCESS'
+        })
+    }
+    catch(error){
+        console.log(error);
+
+        return parseServerActionResponse({
+            error: JSON.stringify(error),
+            status: 'ERROR'
+        });
+    }
+    }
+}
+
+//za watchList
+export const Watch_list = async (_id: string) =>{
+    const session = await auth();
+
+    if(!session) return parseServerActionResponse({
+        error: 'Not singed in.',
+        status: 'Error',
+    });
+    const userId = session?.user.id;
+    const watch = await writeClient.fetch(WATCHLIST_BY_MOVIE_USER_ID_QUERY, {
+        id: _id,
+        userId,
+    });
+    let result;
+    if(watch){
+        try{
+            const result = await writeClient
+            .patch(watch._id)
+            .unset([`movies[_ref=="${_id}"]`])
+            .commit()
+        return parseServerActionResponse({
+            ...result,
+            error: '',
+            status: 'SUCCESSdislike'
+        })
+    }
+    catch(error){
+        return parseServerActionResponse({
+            error: JSON.stringify(error),
+            status: 'ERROR'
+        });
+    }
+    }
+    else{
+        const watch = await writeClient.fetch(WATCHLIST_BY_USER_ID_QUERY, {userId})
+        try{
+        if (watch) {
+            result = await writeClient
+            .patch(watch._id)
+            .append('movies', [
+            {
+                _key: _id,
+                _type: 'reference',
+                _ref: _id,
+            },
+            ])
+            .commit()
+        }
+        else{
+            result = await writeClient.create({
+                _type: "watchList",
                 user: {
                     _type: 'reference',
                     _ref: userId,

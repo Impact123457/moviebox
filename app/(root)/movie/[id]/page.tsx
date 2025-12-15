@@ -1,4 +1,9 @@
-import { LIKE_BY_MOVIE_USER_ID_QUERY, MOVIE_BY_ID_QUERY, WATCHED_BY_MOVIE_USER_ID_QUERY } from "@/sanity/lib/queries";
+import { 
+  LIKE_BY_MOVIE_USER_ID_QUERY, 
+  MOVIE_BY_ID_QUERY, 
+  WATCHED_BY_MOVIE_USER_ID_QUERY, 
+  WATCHLIST_BY_MOVIE_USER_ID_QUERY
+} from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import Link from "next/link";
@@ -32,6 +37,12 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
   })
   const watchedId = watched?._id;
 
+  const watch = await client.fetch(WATCHLIST_BY_MOVIE_USER_ID_QUERY,{
+    id,
+    userId,
+  })
+  const watchId = watch?._id;
+
 
   return (
   <>
@@ -52,7 +63,7 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
           <div className="shadow-lg md:w-[200px] md:h-[50px] w-[150px] justify-between mt-3 flex">
             <Liked id={id} likeId={likeId}/>
             <Watched id={id} watchedId={watchedId}/>
-            <WatchList />
+            <WatchList id={id} watchId={watchId} />
           </div>
         </div>  
       </div>
@@ -61,4 +72,5 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
   </>
   );
 }
+
 

@@ -12,5 +12,5 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem("comment").title("Comment"),
       S.documentTypeListItem("liked").title("Liked"),
       S.documentTypeListItem("watched").title("Watched"),
-      S.documentTypeListItem("diary").title("Diary")
+      S.documentTypeListItem("watchList").title("WatchList")
     ])

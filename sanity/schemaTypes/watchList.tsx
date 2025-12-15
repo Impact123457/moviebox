@@ -1,8 +1,8 @@
 import {defineArrayMember, defineField, defineType} from 'sanity';
 
-export const diary = defineType({
-  name: 'diary',
-  title: 'Diary',
+export const watchList = defineType({
+  name: 'watchList',
+  title: 'WatchList',
   type: 'document',
   fields: [
     defineField({

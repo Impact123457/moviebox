@@ -15,21 +15,22 @@ const Navbar = async() =>{
             <div className="mx-3 flex items-center gap-5 text-black uppercase font-bold text-[15px]">
                 {session && session?.user ?(
                 <> 
-                    <Link href="/movies">
-                        Movies
-                    </Link>
+                        <Link href="/movies">
+                            Movies
+                        </Link>
+                        
+                        <Link href="/liked">
+                            Favourites
+                        </Link>
 
-                    <Link href="/liked">
-                        Favourites
-                    </Link>
+                        <Link href="/watched">
+                            Diary
+                        </Link>
 
-                    <Link href="/watched">
-                        Diary
-                    </Link>
+                        <Link href="/watchlist">
+                            Next watch
+                        </Link>
 
-                    <Link href="/watchlist">
-                        Next watch
-                    </Link>
                     <form action={async() => {
                         "use server"
                         await signOut({redirectTo:"/"})

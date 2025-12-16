@@ -96,7 +96,7 @@ export const WATCHED_MOVIE = (userId: string) => `*[_type == "watched" && user._
   }
 }`
 
-export const SEEN_MOVIE = (userId: string) => `*[_type == "diary" && user._ref == "${userId}"]{
+export const SEEN_MOVIE = (userId: string) => `*[_type == "watchList" && user._ref == "${userId}"]{
   movies[]->{
     _id,
     name,

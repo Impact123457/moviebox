@@ -27,7 +27,7 @@ export default function RegisterPage() {
       password 
     }),
   });
-
+  
   const data = await res.json();
   setLoading(false);
 

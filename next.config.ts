@@ -11,7 +11,11 @@ const nextConfig: NextConfig = {
     {
       protocol: 'http',
       hostname: '*',
-    }
+    },
+    {
+      protocol: 'https',
+      hostname: 'cdn.sanity.io',
+    },
   ]
   }
 };

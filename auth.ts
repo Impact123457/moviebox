@@ -6,7 +6,7 @@ import { writeClient } from "./sanity/lib/write-client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 
-let id: string | null;
+//let id: string | null;
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
 
@@ -34,7 +34,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
   const isCorrect = await bcrypt.compare(password, user.password);
   if (!isCorrect) return null;
-  id = user._id;
+  //id = user._id;
   return {
     id: user._id,
     name: user.name,
@@ -65,24 +65,28 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return true;
     },
 
-    async jwt({token, account, profile}){
-      if(account && profile){
-        const user = await client.fetch(USER_BY_GITHUB_ID_QUERY, {
-          id: profile?.id,
-        });
-        token.provider = "github";
-        token.id = user?._id;
-        token.imageUrl = user?.imageUrl;
-      }
-      else if(id){
-        const user = await client.fetch(USER_BY_ID_QUERY, {
-          id: id,
-        });
-        token.id = user?._id;
-        token.provider = "credentials";
-      }
-      return token;
-    },
+    async jwt({ token, user, account, profile }) {
+
+  // credentials login
+  if (user && account?.provider === "credentials") {
+    token.id = user.id;
+    token.provider = "credentials";
+  }
+
+  // github login
+  if (account?.provider === "github" && profile) {
+    const dbUser = await client.fetch(
+      USER_BY_GITHUB_ID_QUERY,
+      { id: profile.id }
+    );
+
+    token.id = dbUser?._id;
+    token.provider = "github";
+    token.imageUrl = dbUser?.imageUrl;
+  }
+
+  return token;
+},
 
     async session({ session, token }){
       Object.assign(session.user, {id: token.id, imageUrl: token.imageUrl, provider: token.provider});

@@ -12,6 +12,8 @@ import Watched from "@/app/components/Watched";
 import WatchList from "@/app/components/WatchList";
 import { auth } from "@/auth";
 import { SanityLive } from "@/sanity/lib/live";
+import MovieSkeleton from '../../../components/skeletons/movieSkeleton';
+import { Suspense } from "react";
 
 interface Genre {
   _id: string;
@@ -46,10 +48,13 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
 
   return (
   <>
+  {movie ? (
     <div className="p-5 my-5 shadow-lg md:w-[900px] mx-auto h-[520px]">
       <div className="flex gap-6 ">
         <div className="m-5">
+          <Suspense fallback={<MovieSkeleton />}>
             <Image src={movie.image} width={300} height={350} alt={movie.title} className="rounded shadow"/>
+          </Suspense>
         </div>
 
         <div className="pt-5 md:w-[600px] w-[200px]">
@@ -68,6 +73,9 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
         </div>  
       </div>
     </div>
+  ):(
+    <div className="md:w-[900px] h-[550px] mx-auto flex items-center justify-center"><p className="text-center p-5">No movie found</p></div>
+  )}
     <SanityLive />
   </>
   );

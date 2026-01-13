@@ -4,7 +4,6 @@ import { writeClient } from "@/sanity/lib/write-client";
 import { CHECK_FOR_EXISTING_USER } from "@/sanity/lib/queries";
 import fs from "fs";
 import path from "path";
-import { client } from "@/sanity/lib/client";
 
 export async function POST(req: NextRequest) {
   try {
@@ -19,6 +18,8 @@ export async function POST(req: NextRequest) {
 
     // Preveri ali uporabnik že obstaja
     const existingUser = await writeClient.fetch(CHECK_FOR_EXISTING_USER, { email });
+    
+    console.log("\n \n \n \n \n",existingUser, "\n \n \n", req, name , "\n \n \n \n \n");
 
     if (existingUser) {
       return NextResponse.json(

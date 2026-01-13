@@ -5,7 +5,7 @@ export type MovieTypeCard = Omit<Movie, "user"> & {
     image?: string;
 };
 
-const MovieCard = ({movie}: {movie: MovieTypeCard}) => {  
+const MovieCard = async ({movie}: {movie: MovieTypeCard}) => { 
     return(
         <li className="w-[150] h-[210] overflow-hidden">
                 <Link href={`/movie/${movie._id}`}>

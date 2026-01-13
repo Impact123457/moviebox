@@ -3,6 +3,8 @@ import { client } from "@/sanity/lib/client";
 import MovieCard, { MovieTypeCard } from "@/app/components/MovieCard";
 import SearchForm from "@/app/components/SearchForm";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
+import { Suspense } from "react";
+import MovieCardSkeleton from "@/app/components/skeletons/MovieCardSkeleton";
 
 export default async function Movies({searchParams}: {
     searchParams: Promise<{ query?: string }>
@@ -25,7 +27,12 @@ export default async function Movies({searchParams}: {
                     <ul className="cardDiv">
                             {movies?.length > 0 ?(
                                 movies.map((movie: MovieTypeCard) => ( 
-                                    <MovieCard key={movie?._id} movie={movie} />
+                                    <Suspense
+                                        key={movie._id}
+                                        fallback={<MovieCardSkeleton />}
+                                    >
+                                        <MovieCard movie={movie} />
+                                    </Suspense>
                                 ))
                             ):(
                                 <p>No movie found.</p>

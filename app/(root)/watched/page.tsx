@@ -4,6 +4,16 @@ import { auth } from "@/auth";
 import { WATCHED_MOVIE } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 
+export type Movie = {
+    _id: string;
+    title?: string;
+    release?: string;
+    description?: string;
+    genre?: string;
+    Director?: string;
+    image?: string;
+};
+
 export default async function watched(){
     const session = await auth();//a je user prijavlen
     const user = session?.user;
@@ -24,7 +34,7 @@ export default async function watched(){
                 <h2 className="text-black p-3 font-bold text-[20px]">Already seen, but why not again?</h2>
                 <hr className="border border-black mb-1 shadow-lg" /> 
                 <ul className="cardDiv">
-                    {movie.map((movie: any) => (
+                    {movie.map((movie: Movie) => (
                         <li key={movie._id} className="w-[150px] h-[210px] overflow-hidden shadow">
                         <Link href={`/movie/${movie._id}`}>
                             <Image src={movie.image || '/logo.png'} alt={movie.title || "Movie Poster"} width={150} height={210} className="object-cover"/>

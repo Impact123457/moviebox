@@ -10,7 +10,7 @@ import {
 } from "@/sanity/lib/queries";
 
 //za update profile:
-export const UpdateProfile= async (state: any, form: FormData, _id: string) =>{
+export const UpdateProfile= async (state: unknown, form: FormData, _id: string) =>{
     const session = await auth();
 
     if(!session) return parseServerActionResponse({

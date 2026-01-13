@@ -48,6 +48,7 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
 
   return (
   <>
+  {movie ? (
     <div className="p-5 my-5 shadow-lg md:w-[900px] mx-auto h-[520px]">
       <div className="flex gap-6 ">
         <div className="m-5">
@@ -72,6 +73,9 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
         </div>  
       </div>
     </div>
+  ):(
+    <div className="md:w-[900px] h-[550px] mx-auto flex items-center justify-center"><p className="text-center p-5">No movie found</p></div>
+  )}
     <SanityLive />
   </>
   );

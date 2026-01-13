@@ -14,7 +14,8 @@ const Profile = async ({ params }: { params: { id: string } }) => {
 
     return(
         <>
-        <div className="md:w-[900px] w-[400px] my-5 mx-auto h-[530px] shadow-lg">
+        {user ? (
+            <div className="md:w-[900px] w-[400px] my-5 mx-auto h-[530px] shadow-lg">
                 <div>
                     <h1 className="m-5 font-bold text-2xl">{user.username}</h1> 
                     <div className="flex p-2">
@@ -35,6 +36,10 @@ const Profile = async ({ params }: { params: { id: string } }) => {
                 <Link href="/watchlist">Next watch</Link>
             </div>    
             </div>
+        ):(
+            <div className="md:w-[900px] h-[550px] mx-auto flex items-center justify-center"><p className="text-center p-5">No user found</p></div>
+        )}
+        
         </>
     );
 }

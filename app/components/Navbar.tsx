@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { auth, signOut, signIn } from "@/auth";
+import { auth, signOut } from "@/auth";
 
 const Navbar = async() =>{   
     const session = await auth();//a je user prijavlen
@@ -33,7 +33,7 @@ const Navbar = async() =>{
 
                     <form action={async() => {
                         "use server"
-                        await signOut({redirectTo:"/"})
+                        await signOut({redirect: true, redirectTo: "/"})
                     }}>
                         <button type="submit" className="uppercase font-bold cursor-pointer">Log out</button>
                     </form>

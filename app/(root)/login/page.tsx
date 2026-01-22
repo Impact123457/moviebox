@@ -38,7 +38,7 @@ export default function LoginPage() {
           <input type="email" className="input" placeholder="email" onChange={(e) => setEmail(e.target.value)} required/>
           <input type="password" className="input" placeholder="password" onChange={(e) => setPassword(e.target.value)} required/>
 
-          <button type="submit" className="logButton border-black bg-black text-white" disabled={loading}>
+          <button type="submit" name="login" className="logButton border-black bg-black text-white" disabled={loading}>
             {loading ? "Logging in..." : "Log In"}
           </button>
         </form>

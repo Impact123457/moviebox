@@ -31,7 +31,7 @@ export default async function Navbar(){
                         "use server" //deluje na strezniku, izpise uporabnika in ga preusmeri na main page
                         await signOut({redirect: true, redirectTo: "/"})
                     }}>
-                        <button type="submit" className="uppercase font-bold cursor-pointer">Log out</button>
+                        <button type="submit" name="logout" className="uppercase font-bold cursor-pointer">Log out</button>
                     </form>
                     <Link href={`/user/${session?.user.id}`}>
                         <Image src="/profile.png" alt="profile icon" width={40} height={40} className="rounded-full"/>

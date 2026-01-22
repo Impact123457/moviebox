@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-const Footer = () =>{
+export default function Footer(){
     return(
         <section className="py-5 bg-white shadow-sm font-sans">
             <div className="flex justify-between items-center">
@@ -23,9 +23,7 @@ const Footer = () =>{
                     +368 098 123 333
                     </p>
                 </div>
-                
             </div>
         </section>
     )
 }
-export default Footer

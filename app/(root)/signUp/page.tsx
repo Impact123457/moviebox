@@ -1,9 +1,9 @@
-"use client";
+"use client"; //se izvede na brskalniku
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 export default function RegisterPage() {
+  //states so stanja v katera se ves čas shranjujejo podatki iz form. Ko je pritisnjen gumb submit, se prenesejo ti podatki v funkcijo.
   const router = useRouter();
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
@@ -16,6 +16,7 @@ export default function RegisterPage() {
   e.preventDefault();
   setLoading(true);
 
+  //klice se api za registracijo
   const res = await fetch("/api/signUp", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -31,6 +32,7 @@ export default function RegisterPage() {
   const data = await res.json();
   setLoading(false);
 
+  //preveri ali je uspesna registracija ali ne
   if (res.ok) {
     alert("Registration successful! You can now log in.");
     router.push("../login");
@@ -38,7 +40,6 @@ export default function RegisterPage() {
     alert(data.error || "Something went wrong");
   }
 };
-
   return (
   <section className="signSection">
     <div className="signForm">
@@ -49,7 +50,6 @@ export default function RegisterPage() {
         <input className="input" type="text" placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
         <input className="input" type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
         <input className="input" type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
-
       <button className="logButton border-black bg-black text-white" type="submit" disabled={loading}> {loading ? "Registering..." : "Register"} </button>
       </form>
     </div>

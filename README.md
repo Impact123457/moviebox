@@ -55,6 +55,8 @@ Uporabniku omogoče pregled filmov, ki jih je že pogledal, ki so mu bili všeč
 
         pnpm install
 
+```pnpm ni priporočen ker včasih povzroča probleme```
+
 
 
 3. Zaženi development server:

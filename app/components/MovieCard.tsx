@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import {Movie, User} from "@/sanity/types";
+import {Movie} from "@/sanity/types";
 export type MovieTypeCard = Omit<Movie, "user"> & {
     image?: string;
 };
 
-const MovieCard = async ({movie}: {movie: MovieTypeCard}) => { 
+export default async function MovieCard({movie}: {movie: MovieTypeCard}){ 
     return(
         <li className="w-[150] h-[210] overflow-hidden">
                 <Link href={`/movie/${movie._id}`}>
@@ -14,4 +14,3 @@ const MovieCard = async ({movie}: {movie: MovieTypeCard}) => {
         </li>
     )
 }
-export default MovieCard

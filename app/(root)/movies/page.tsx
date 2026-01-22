@@ -1,5 +1,4 @@
 import { MOVIE_QUERY } from "@/sanity/lib/queries";
-import { client } from "@/sanity/lib/client";
 import MovieCard, { MovieTypeCard } from "@/app/components/MovieCard";
 import SearchForm from "@/app/components/SearchForm";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
@@ -21,7 +20,6 @@ export default async function Movies({searchParams}: {
                 </p>     
                     <SearchForm query={query}/>
                 </div>
-                
                 <div className="justify-center items-center ">     
                     <hr className="border border-black mb-1 shadow-lg" />    
                     <ul className="cardDiv">

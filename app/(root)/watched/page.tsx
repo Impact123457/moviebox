@@ -14,7 +14,7 @@ export type Movie = {
     image?: string;
 };
 
-export default async function watched(){
+export default async function Watched(){
     const session = await auth();//a je user prijavlen
     const user = session?.user;
     
@@ -26,8 +26,9 @@ export default async function watched(){
     const movie = watched?.[0]?.movies || [];
     
     if (!movie || movie.length === 0) {
-             return <div className="md:w-[900px] h-[550px] mx-auto flex items-center justify-center"><p className="text-center p-5">You have not watched any movies yet!!</p></div>
+        return <div className="md:w-[900px] h-[550px] mx-auto flex items-center justify-center"><p className="text-center p-5">You have not watched any movies yet!!</p></div>
     }
+    
     return(
         <section className="mt-5 md:w-[900px] shadow-lg mx-auto min-h-[520px]">
             <div>

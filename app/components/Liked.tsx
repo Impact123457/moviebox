@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import z from "zod";
 import { LikeMovie } from "@/lib/actions";
 
-const Liked = ({id, likeId}: {id: string, likeId: string | null}) => {
+export default function Liked({id, likeId}: {id: string, likeId: string | null}){
     const [errors, setErrors] = useState<Record<string, string>>({});//shranjuje napake
     const router = useRouter();//navigacija
 
@@ -26,25 +26,21 @@ const Liked = ({id, likeId}: {id: string, likeId: string | null}) => {
             }
             catch (error){
                 if(error instanceof z.ZodError){//če preverjanje podatkov na strežniku ne uspe
-
                     const fieldErrors = error.flatten().fieldErrors;
                     setErrors(fieldErrors as unknown as Record<string, string>);
                     toast.error("Failed to like a movie");
-    
                     return {error: 'Liking failed.', status:'ERROR'};
                 }
                 toast.error("Unexpected error");
                 return {error: 'unexpected error', status: 'ERROR'};
             } 
         };
-
     const [state2, formAction, isPending] = useActionState(handleFormSubmit2,
         {
         error : '',
         status: 'INITIAL',
         }
     );
-
     return(
         <form action={formAction}>
             <button className="cursor-pointer mx-3">
@@ -54,4 +50,3 @@ const Liked = ({id, likeId}: {id: string, likeId: string | null}) => {
         </form>
     )
 }
-export default Liked;

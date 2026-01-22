@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -38,7 +37,6 @@ export default function RegisterPage() {
     alert(data.error || "Something went wrong");
   }
 };
-
   return (
   <section className="signSection">
     <div className="signForm">
@@ -49,7 +47,6 @@ export default function RegisterPage() {
         <input className="input" type="text" placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
         <input className="input" type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
         <input className="input" type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
-
       <button className="logButton border-black bg-black text-white" type="submit" disabled={loading}> {loading ? "Registering..." : "Register"} </button>
       </form>
     </div>

@@ -7,34 +7,32 @@ import { useRouter } from "next/navigation";
 import { WatchedMovies } from "@/lib/actions";
 import z from "zod";
 
-const Watched = ({id, watchedId}: {id: string, watchedId: string | null}) => {
+export default function Watched({id, watchedId}: {id: string, watchedId: string | null}){
     const [errors, setErrors] = useState<Record<string, string>>({});//shranjuje napake
     const router = useRouter();//navigacija
 
     const handleFormSubmit2 = async () => {
-            try{
-                const result = await WatchedMovies(id);//doda al odstrani like
-                if(result.status == 'SUCCESS'){
-                    toast.success("Movie added to watched.")
-                }
-                else if(result.status == 'SUCCESSdislike'){
-                    toast.success("Movie removed from watched.")
-                }
-                router.push("");
+        try{
+            const result = await WatchedMovies(id);//doda al odstrani like
+            if(result.status == 'SUCCESS'){
+                toast.success("Movie added to watched.")
             }
-            catch (error){
-                if(error instanceof z.ZodError){//če preverjanje podatkov na strežniku ne uspe
-                    const fieldErrors = error.flatten().fieldErrors;
-                    setErrors(fieldErrors as unknown as Record<string, string>);
-                    toast.error("Failed to add movie to watched.");
-    
-                    return {error: 'Adding to watched failed.', status:'ERROR'};
-                }
-                toast.error("Unexpected error");
-                return {error: 'unexpected error', status: 'ERROR'};
-            } 
-        };
-
+            else if(result.status == 'SUCCESSdislike'){
+                toast.success("Movie removed from watched.")
+            }
+            router.push("");
+        }
+        catch (error){
+            if(error instanceof z.ZodError){//če preverjanje podatkov na strežniku ne uspe
+                const fieldErrors = error.flatten().fieldErrors;
+                setErrors(fieldErrors as unknown as Record<string, string>);
+                toast.error("Failed to add movie to watched.");    
+                return {error: 'Adding to watched failed.', status:'ERROR'};
+            }
+            toast.error("Unexpected error");
+            return {error: 'unexpected error', status: 'ERROR'};
+        } 
+    };
     const [state2, formAction, isPending] = useActionState(handleFormSubmit2,
         {
         error : '',
@@ -50,5 +48,4 @@ const Watched = ({id, watchedId}: {id: string, watchedId: string | null}) => {
             </button>
         </form>
     )
-}
-export default Watched; 
+} 

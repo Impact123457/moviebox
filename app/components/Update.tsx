@@ -3,7 +3,7 @@
 import { useState, useActionState } from 'react';
 import { profileSchema } from "@/lib/validation";
 import { z } from 'zod';
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { UserType } from '../(root)/user/editProfile/[id]/page';
 import { UpdateProfile } from "@/lib/actions";
 import { toast } from "sonner";
@@ -19,48 +19,48 @@ export default function Update({user}: {user: UserType}){
     function handleFile(file: File) {
         const url = URL.createObjectURL(file); // takoj dobiš preview
     setFile(url);
-  }
-
+    }
     const router = useRouter();
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleFormSubmit = async (prevState: any, formData: FormData) => {
-            try{
-                let formValues;
-                if(file == user.image){
-                    formValues = {
-                    username: formData.get("username") as string,
-                    bio: formData.get("bio") as string,
-                    }
+        try{
+            let formValues;
+            if(file == user.image){
+                formValues = {
+                username: formData.get("username") as string,
+                bio: formData.get("bio") as string,
                 }
-                else{
-                    formValues = {
-                    username: formData.get("username") as string,
-                    bio: formData.get("bio") as string,
-                    file: formData.get("file") as File
-                    }
-                }
-            await profileSchema.parseAsync(formValues);
-            const result = await UpdateProfile(prevState, formData, user._id);  
-                if(result.status == 'SUCCESS'){
-                    toast.success("Your profile was updated succesfully!")
-                }
-                router.push(`/user/${user?._id}`);
             }
-            catch (error){
-                if(error instanceof z.ZodError){
-                    const fieldErrors = error.flatten().fieldErrors;
-                    
-                    setErrors(fieldErrors as unknown as Record<string, string>);
-
-                    console.log("\n \n \n \n \n",error , "\n \n \n \n \n");
-
-                    toast.error("Please check your inputs and try again");
-                    return {...prevState, error: 'Updating failed', status:'ERROR'};
+            else{
+                formValues = {
+                username: formData.get("username") as string,
+                bio: formData.get("bio") as string,
+                file: formData.get("file") as File
                 }
-                toast.error("Unexpected error");
-                return {...prevState, error: 'unexpected error', status: 'ERROR'};
-            } 
-        };
+            }
+        await profileSchema.parseAsync(formValues);
+        const result = await UpdateProfile(prevState, formData, user._id);  
+            if(result.status == 'SUCCESS'){
+                toast.success("Your profile was updated succesfully!")
+            }
+            router.push(`/user/${user?._id}`);
+        }
+        catch (error){
+            if(error instanceof z.ZodError){
+                const fieldErrors = error.flatten().fieldErrors;
+                    
+                setErrors(fieldErrors as unknown as Record<string, string>);
+
+                console.log("\n \n \n \n \n",error , "\n \n \n \n \n");
+
+                toast.error("Please check your inputs and try again");
+                return {...prevState, error: 'Updating failed', status:'ERROR'};
+            }
+            toast.error("Unexpected error");
+            return {...prevState, error: 'unexpected error', status: 'ERROR'};
+        } 
+    };
 
     const [state, formAction, isPending] = useActionState(handleFormSubmit,
         {
@@ -68,7 +68,6 @@ export default function Update({user}: {user: UserType}){
         status: 'INITIAL',
         }
     );
-
   return (
     <section>
         <div className="signForms">
@@ -82,7 +81,6 @@ export default function Update({user}: {user: UserType}){
                         onChange={(e) => setUsername(e.target.value)}
                     />
                     {errors.title && <p className='comment-form-error'>{errors.title}</p>}
-
                     <label htmlFor="bio" className='comment-form-label'>bio</label>
                     <textarea 
                         id='bio'

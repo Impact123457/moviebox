@@ -14,7 +14,7 @@ export type Movie = {
     image?: string;
 };
 
-export default async function edit(){
+export default async function Watchlist(){
     const session = await auth();//a je user prijavlen
     const user = session?.user;
     

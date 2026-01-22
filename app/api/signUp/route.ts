@@ -41,7 +41,6 @@ export async function POST(req: NextRequest) {
     )
      console.log("Image asset:", imageAsset);
     
-
  const newUser = await writeClient.create({
   _type: "user", 
   name,

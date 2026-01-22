@@ -1,15 +1,15 @@
-import { MOVIE_BY_ID_QUERY, USER_BY_ID_QUERY } from "@/sanity/lib/queries";
+import { USER_BY_ID_QUERY } from "@/sanity/lib/queries";
 import { auth } from "@/auth";
 import { client } from "@/sanity/lib/client";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
-const Profile = async ({ params }: { params: { id: string } }) => {
+export default async function Profile({ params }: { params: { id: string } }){
     const id = (await params).id;
     const session = await auth();
+    
     const user = await client.fetch(USER_BY_ID_QUERY, { id });
-    //console.log(session?.user.provider)
     if (!session) redirect("/");
 
     return(
@@ -39,8 +39,6 @@ const Profile = async ({ params }: { params: { id: string } }) => {
         ):(
             <div className="md:w-[900px] h-[550px] mx-auto flex items-center justify-center"><p className="text-center p-5">No user found</p></div>
         )}
-        
         </>
     );
 }
-export default Profile;

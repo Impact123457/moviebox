@@ -12,7 +12,7 @@ import Watched from "@/app/components/Watched";
 import WatchList from "@/app/components/WatchList";
 import { auth } from "@/auth";
 import { SanityLive } from "@/sanity/lib/live";
-import MovieSkeleton from '../../../components/skeletons/movieSkeleton';
+import MovieSkeleton from '@/app/components/skeletons/movieSkeleton';
 import { Suspense } from "react";
 
 interface Genre {
@@ -44,7 +44,6 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
     userId,
   })
   const watchId = watch?._id;
-
 
   return (
   <>

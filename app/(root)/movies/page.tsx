@@ -8,6 +8,7 @@ import MovieCardSkeleton from "@/app/components/skeletons/MovieCardSkeleton";
 export default async function Movies({searchParams}: {
     searchParams: Promise<{ query?: string }>
 }){
+    //definira query in params glede na to kaj je uporabnik iskal
     const query = (await searchParams).query;
     const params = { search: query || null}
     const {data: movies} = await sanityFetch({ query: MOVIE_QUERY, params});
@@ -17,12 +18,14 @@ export default async function Movies({searchParams}: {
                 <div className="flex items-center justify-between">
                 <p className="text-black font-bold md:text-[20px]">
                     {query ? `Search results for "${query}"` : 'Movies'}
-                </p>     
+                </p>
+                    {/**tu notri uporabnik isce film */}
                     <SearchForm query={query}/>
                 </div>
                 <div className="justify-center items-center ">     
                     <hr className="border border-black mb-1 shadow-lg" />    
                     <ul className="cardDiv">
+                        {/**prikazejo se vsi filmi v spremenljivki movies */}
                             {movies?.length > 0 ?(
                                 movies.map((movie: MovieTypeCard) => ( 
                                     <Suspense
@@ -38,6 +41,7 @@ export default async function Movies({searchParams}: {
                     </ul>
                 </div>
         </div>
+        {/**real-time updating. Vedno se sproti spreminja */}
         <SanityLive />
        </>  
     );

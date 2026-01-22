@@ -6,11 +6,11 @@ import { writeClient } from "./sanity/lib/write-client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 
-//let id: string | null;
-
 export const { handlers, signIn, signOut, auth } = NextAuth({
-
+  //providers so vsi nacini s katerimi se uporabnik lahko prijavi
+  //lahko z credentials ali z github
   providers: [
+    //pridobi credentials in login strani, nato preveri ce obstajajo
     CredentialsProvider({
       name: "Credentials",
 
@@ -21,18 +21,22 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       async authorize(credentials) {
   if (!credentials?.email || !credentials?.password) return null;
 
+  //zapise iz credentials v spremenljivke podatke
   const email = String(credentials.email);
   const password = String(credentials.password);
 
+  //preveri ali uporabnik obstaja in ga pridobi, s tem preveri ce je gmail pravilno vpisan.
   const user = await client.fetch(
   USER_BY_EMAIL_QUERY, { email });
 
   if (!user) return null;
   if (!user.password) return null;
 
+  //preveri ce je geslo pravilno
   const isCorrect = await bcrypt.compare(password, user.password);
   if (!isCorrect) return null;
-  //id = user._id;
+
+  //ce je vse praavilno, returna pdatke ki se zapisejo v session
   return {
     id: user._id,
     name: user.name,
@@ -44,7 +48,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
     GitHub],
   callbacks: {
+    //callbacks se izvedejo po vsaki prijavi. tu se shranijo vsi podatki v session in v bazo, ce je prijava nova in z githubom.
     async signIn({ user, profile, account }) {
+      //ce je prijavljen z githubom, se preveri ali ta ze obstaja, ce ne, se doda uporabik v bazo.
       if(account?.provider == "github"){
         const existingUser = await client.fetch(USER_BY_GITHUB_ID_QUERY, { 
           id: profile?.id,
@@ -63,29 +69,31 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
 
     async jwt({ token, user, account, profile }) {
-      
-  // credentials login
-  if (user && account?.provider === "credentials") {
-    token.id = user.id;
-    token.provider = "credentials";
-  }
+    //v jwt se vsi podatki shranijo v token, ki dovoljuje to prijavo in session. 
+    //shrani se tudi, kateri provider je bil izbran, kajti s tem si pomagamo v drugih delih kode
+    // credentials login
+    if (user && account?.provider === "credentials") {
+      token.id = user.id;
+      token.provider = "credentials";
+    }
 
-  // github login
-  if (account?.provider === "github" && profile) {
-    const dbUser = await client.fetch(
-      USER_BY_GITHUB_ID_QUERY,
-      { id: profile.id }
-    );
+    // github login
+    if (account?.provider === "github" && profile) {
+      const dbUser = await client.fetch(
+        USER_BY_GITHUB_ID_QUERY,
+        { id: profile.id }
+      );
 
-    token.id = dbUser?._id;
-    token.provider = "github";
-    token.imageUrl = dbUser?.imageUrl;
-  }
+      token.id = dbUser?._id;
+      token.provider = "github";
+      token.imageUrl = dbUser?.imageUrl;
+    }
 
-  return token;
-},
+    return token;
+  },
 
     async session({ session, token }){
+      //vsi podatki v tokenu se shranijo v session. specificno v sessin.user
       Object.assign(session.user, {id: token.id, imageUrl: token.imageUrl, provider: token.provider});
       return session;
     },

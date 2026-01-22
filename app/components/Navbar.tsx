@@ -3,7 +3,7 @@ import Image from "next/image"
 import { auth, signOut } from "@/auth";
 
 export default async function Navbar(){   
-    const session = await auth();//a je user prijavlen
+    const session = await auth();//pridobi uporabnika iz session
     return(
         <header className="bg-white shadow-sm">
         <nav className="flex justify-between items-center">
@@ -28,7 +28,7 @@ export default async function Navbar(){
                             Next watch
                         </Link>
                     <form action={async() => {
-                        "use server"
+                        "use server" //deluje na strezniku, izpise uporabnika in ga preusmeri na main page
                         await signOut({redirect: true, redirectTo: "/"})
                     }}>
                         <button type="submit" className="uppercase font-bold cursor-pointer">Log out</button>

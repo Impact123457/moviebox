@@ -1,6 +1,7 @@
 import Form from "next/form";
 import Image from "next/image";
 
+//s tem uporabnik isce filme na movies strani
 export default function SearchForm({query}: {query?: string}){
     return(
         <Form action="/movies" scroll={false} className="SearchForm">

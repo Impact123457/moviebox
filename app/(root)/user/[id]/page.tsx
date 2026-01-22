@@ -9,6 +9,7 @@ export default async function Profile({ params }: { params: { id: string } }){
     const id = (await params).id;
     const session = await auth();
     
+    //preveri ce je uporabnik prijavljen, ce je, se prikazejo vsi njegovi podatki
     const user = await client.fetch(USER_BY_ID_QUERY, { id });
     if (!session) redirect("/");
 

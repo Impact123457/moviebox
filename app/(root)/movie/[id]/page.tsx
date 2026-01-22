@@ -15,12 +15,16 @@ import { SanityLive } from "@/sanity/lib/live";
 import MovieSkeleton from '@/app/components/skeletons/movieSkeleton';
 import { Suspense } from "react";
 
+//definiran tip
 interface Genre {
   _id: string;
   name: string;
 }
 
 export default async function MoviePage(props: { params: Promise<{ id: string }> }) {
+  /**pridobi se user id in nato vsi podatki za movie, nato pa se vsi podatki za to ali je user vseckav film,
+   * dodal na watchlist ali watched
+   */
   const session = await auth();
   const userId = session?.user.id;
   const { id } = await props.params;   
@@ -65,6 +69,7 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
             </div>
           <p className="mt-4 md:w-[400px]">{movie.description}</p>
           <div className="shadow-lg md:w-[200px] md:h-[50px] w-[150px] justify-between mt-3 flex">
+            {/**se pokazejo v stanju, glede na to ali so dodani ali ne */}
             <Liked id={id} likeId={likeId}/>
             <Watched id={id} watchedId={watchedId}/>
             <WatchList id={id} watchId={watchId} />
@@ -75,6 +80,7 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
   ):(
     <div className="md:w-[900px] h-[550px] mx-auto flex items-center justify-center"><p className="text-center p-5">No movie found</p></div>
   )}
+    {/**real-time updating. Vedno se sproti spreminja */}
     <SanityLive />
   </>
   );

@@ -42,6 +42,7 @@ export default function WatchList({id, watchId}: {id: string, watchId: string | 
     return(
         <form action={formAction}>
             <button className="cursor-pointer mx-3">
+                {/**se prikaze glede na to ali je ze na watchlistu ali ne */}
                 {watchId 
                 ? <ListCheck className="w-10 h-10 text-red-500"/>
                 : <ListCheck className="w-10 h-10 text-black"/>}

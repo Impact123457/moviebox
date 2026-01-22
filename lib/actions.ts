@@ -1,4 +1,4 @@
-'use server'
+'use server' //deluje na server strani
 
 import { auth } from "@/auth"
 import { parseServerActionResponse } from "./utils";
@@ -13,20 +13,26 @@ import {
 export const UpdateProfile= async (state: unknown, form: FormData, _id: string) =>{
     const session = await auth();
 
+    //ce uporabnik ni prijavljen
     if(!session) return parseServerActionResponse({
         error: 'Not singed in',
         status: 'Error',
 
     });
+
+    //pridobi podatke
     const username = form.get("username") as string;
     const bio = form.get("bio") as string;
     let file = form.get("file") as File | null;
 
+    //preveri kako velik je file, kajti file vedno obstaja, samo velikost je 0
     if(file && file.size <= 0){
         file = null;
     }
     try{
         let result;
+        //preveri ali se posodobi z sliko vred ali ne. Ce file je, potem se posodobi z njim vred.
+        //drugace se posodobijo samo ostali podatki.
         if(file){
             const buffer = Buffer.from(await file.arrayBuffer());
 
@@ -52,12 +58,14 @@ export const UpdateProfile= async (state: unknown, form: FormData, _id: string) 
             bio,
             }).commit();
         } 
+        //success
         return parseServerActionResponse({
             ...result,
             error: '',
             status: 'SUCCESS'
         })
     }
+    //error
     catch(error){
         console.log(error);
 
@@ -73,11 +81,14 @@ export const UpdateProfile= async (state: unknown, form: FormData, _id: string) 
 export const LikeMovie = async (_id: string) =>{
     const session = await auth();
 
+    //ali je user prijavljen
     if(!session) return parseServerActionResponse({
         error: 'Not singed in',
         status: 'Error',
 
     });
+
+    //definira se spremenljivka
     const userId = session?.user.id;
     const liked = await writeClient.fetch(LIKE_BY_MOVIE_USER_ID_QUERY, {
         id: _id,
@@ -85,6 +96,7 @@ export const LikeMovie = async (_id: string) =>{
     });
     let result;
     if(liked){
+        //ce spremenljivka obstaja, se izbrise like
         try{
             const result = await writeClient
             .patch(liked._id)
@@ -106,6 +118,7 @@ export const LikeMovie = async (_id: string) =>{
     }
     }
     else{
+        //ce spremenljivka ne obstaja, se doda like
         const like = await writeClient.fetch(LIKE_BY_USER_ID_QUERY, {userId})
         try{
         if (like) {
@@ -157,6 +170,7 @@ export const LikeMovie = async (_id: string) =>{
 export const WatchedMovies = async (_id: string) =>{
     const session = await auth();
 
+    //ali je use prijavljen
     if(!session) return parseServerActionResponse({
         error: 'Not singed in.',
         status: 'Error',
@@ -169,6 +183,7 @@ export const WatchedMovies = async (_id: string) =>{
     });
     let result;
     if(watched){
+        //ce watched onstaja, se izbrise, drugace se v else doda
         try{
             const result = await writeClient
             .patch(watched._id)
@@ -241,6 +256,7 @@ export const WatchedMovies = async (_id: string) =>{
 export const Watch_list = async (_id: string) =>{
     const session = await auth();
 
+    //preveri ali je user prijavljen
     if(!session) return parseServerActionResponse({
         error: 'Not singed in.',
         status: 'Error',
@@ -252,6 +268,7 @@ export const Watch_list = async (_id: string) =>{
     });
     let result;
     if(watch){
+        //ce watch obstaja, se izbrise, ce watch ne obstaja, se v else doda
         try{
             const result = await writeClient
             .patch(watch._id)

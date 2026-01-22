@@ -10,7 +10,7 @@ import { toast } from "sonner";
 
 export default function Update({user}: {user: UserType}){
 
-    const [errors, setErrors] = useState<Record<string, string>>({});
+    const [errors, setErrors] = useState<Record<string, string>>({}); //shranjevanje errorja
 
     const [username, setUsername] = useState(user.username|| "");
     const [bio, setBio] = useState(user.bio || "");
@@ -20,10 +20,12 @@ export default function Update({user}: {user: UserType}){
         const url = URL.createObjectURL(file); // takoj dobiš preview
     setFile(url);
     }
-    const router = useRouter();
+    const router = useRouter(); //navigacija
 
+    //ignorira any error ki v resnici ne skoduje
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleFormSubmit = async (prevState: any, formData: FormData) => {
+        //poskusi posodobiti uporabnika z action Update
         try{
             let formValues;
             if(file == user.image){
@@ -42,17 +44,16 @@ export default function Update({user}: {user: UserType}){
         await profileSchema.parseAsync(formValues);
         const result = await UpdateProfile(prevState, formData, user._id);  
             if(result.status == 'SUCCESS'){
-                toast.success("Your profile was updated succesfully!")
+                toast.success("Your profile was updated succesfully!")//toast je display okno
             }
             router.push(`/user/${user?._id}`);
         }
+        //prikaze errorje
         catch (error){
             if(error instanceof z.ZodError){
                 const fieldErrors = error.flatten().fieldErrors;
                     
                 setErrors(fieldErrors as unknown as Record<string, string>);
-
-                console.log("\n \n \n \n \n",error , "\n \n \n \n \n");
 
                 toast.error("Please check your inputs and try again");
                 return {...prevState, error: 'Updating failed', status:'ERROR'};

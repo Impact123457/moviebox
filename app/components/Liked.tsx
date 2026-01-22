@@ -1,4 +1,4 @@
-"use client" // da lahk uporablam npr. useState, useAction, StateuseRouter
+"use client" //delovanje na brskalniku
 
 import { useActionState, useState } from "react";
 //useState = za shranjevanje napak
@@ -44,6 +44,7 @@ export default function Liked({id, likeId}: {id: string, likeId: string | null})
     return(
         <form action={formAction}>
             <button className="cursor-pointer mx-3">
+                {/**se prikaze glede na to ali je liked ali ni */}
                 {likeId ? <Heart className="w-10 h-10 text-red-500"/>
                 : <Heart className="w-10 h-10 text-black"/>}
             </button>

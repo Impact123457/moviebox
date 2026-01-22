@@ -1,8 +1,9 @@
-"use client";
+"use client"; //se izvede na brskalniku
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
+  //states so stanja v katera se ves čas shranjujejo podatki iz form. Ko je pritisnjen gumb submit, se prenesejo ti podatki v funkcijo.
   const router = useRouter();
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
@@ -15,6 +16,7 @@ export default function RegisterPage() {
   e.preventDefault();
   setLoading(true);
 
+  //klice se api za registracijo
   const res = await fetch("/api/signUp", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -30,6 +32,7 @@ export default function RegisterPage() {
   const data = await res.json();
   setLoading(false);
 
+  //preveri ali je uspesna registracija ali ne
   if (res.ok) {
     alert("Registration successful! You can now log in.");
     router.push("../login");

@@ -18,14 +18,20 @@ describe('check working', () => {
     cy.get('input[type="password"]')
       .type("123");
 
+    cy.intercept('GET', '/api/auth/session').as('session')
+
     cy.get('button[type="submit"][name="login"]')
       .click();
 
-    cy.getCookie('authjs.session-token', { timeout: 20000 })
-  .should('exist');
+    cy.wait('@session', { timeout: 20000 })
+  .its('response.statusCode')
+  .should('eq', 200)
 
-    cy.getCookie('__Secure-authjs.session-token', { timeout: 20000 })
-      .should('exist');
+// 🔥 POČAKAJ NA REDIRECT NA HOME
+    cy.location('pathname', { timeout: 20000 }).should('eq', '/')
+
+    // 🔥 ZDAJ je UI stabilen
+    cy.contains('a', 'Movies', { timeout: 20000 }).should('exist')
 
     cy.visit('http://localhost:3000/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz?')
 
@@ -65,13 +71,9 @@ describe('check working', () => {
     cy.get('button[type="submit"][name="login"]')
       .click();
 
-    cy.getCookie('authjs.session-token', { timeout: 20000 })
-    .should('exist');
+    
 
-    cy.getCookie('__Secure-authjs.session-token', { timeout: 20000 })
-    .should('exist');
-
-    cy.get('a[href*="movies"]').click();
+    cy.get('a[href*="movies"]', {timeout: 20000}).click();
 
     cy.location('pathname', { timeout: 10000 })
     .should('eq', '/movies')

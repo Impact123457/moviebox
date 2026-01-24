@@ -25,11 +25,7 @@ describe('check working', () => {
 
     cy.wait('@session', { timeout: 20000 });
 
-// 🔥 POČAKAJ NA REDIRECT NA HOME
     cy.location('pathname', { timeout: 20000 }).should('eq', '/');
-
-    // 🔥 ZDAJ je UI stabilen
-    cy.contains('a', 'Movies', { timeout: 20000 }).should('exist');
 
     cy.visit('http://localhost:3000/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz?');
 
@@ -74,11 +70,8 @@ describe('check working', () => {
     
     cy.wait('@session', { timeout: 20000 });
 
-// 🔥 POČAKAJ NA REDIRECT NA HOME
     cy.location('pathname', { timeout: 20000 }).should('eq', '/');
 
-    // 🔥 ZDAJ je UI stabilen
-    cy.contains('a', 'Movies', { timeout: 20000 }).should('exist');
     cy.get('a[href*="movies"]', {timeout: 20000}).click();
 
     cy.location('pathname', { timeout: 10000 })

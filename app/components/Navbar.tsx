@@ -8,7 +8,7 @@ export default async function Navbar(){
         <header className="bg-white shadow-sm">
         <nav className="flex justify-between items-center">
             <div className="p-3">
-                <Link href="/">
+                <Link href="/" id="logo">
                     <Image src="/logo.png" alt="logo" width={90} height={90}></Image>
                 </Link>
             </div>

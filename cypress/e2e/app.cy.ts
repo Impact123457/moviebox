@@ -1,5 +1,5 @@
 describe('check working', () => {
-  it('should navigate to login and login', () => {
+  it('login, open movies, press all buttons', () => {
     cy.visit('http://localhost:3000/')
     
     cy.get('a[href*="login"]').click()
@@ -21,12 +21,106 @@ describe('check working', () => {
 
     cy.get('button[type="submit"][name="logout"]').should("exist");
 
+    cy.get('a[href*="movies"]').click();
+
+    cy.get('button[type="submit"][name="logout"]', { timeout: 10000 }).should('exist')
+
+    cy.url().should('include', '/movies');
+
+    cy.get('img:visible').each(($img) => {
+  cy.wrap($img).should(($el) => {
+    const img = $el[0] as HTMLImageElement
+    expect(img.naturalWidth).to.be.greaterThan(0)
+  })
+})
+
+    cy.get('input[name="query"]').type('star');
+
+    cy.get('button[name="search"]').click();
+
+    cy.get('img:visible').each(($img) => {
+  cy.wrap($img).should(($el) => {
+    const img = $el[0] as HTMLImageElement
+    expect(img.naturalWidth).to.be.greaterThan(0)
+  })
+})
+
+
+    cy.get('a[href^="/movie/"]').first().click();
+
+    cy.url().should('include', '/movie/');
+
+    cy.get('img:visible').each(($img) => {
+  cy.wrap($img).should(($el) => {
+    const img = $el[0] as HTMLImageElement
+    expect(img.naturalWidth).to.be.greaterThan(0)
+  })
+})
+
+
+
+    cy.get('button[name="liked"]').click();
+
+    cy.get('button[name="liked"] svg', { timeout: 10000 })
+  .should('have.class', 'text-red-500')
+
+    cy.get('button[name="liked"]').click();
+
+    cy.get('button[name="liked"] svg', { timeout: 10000 })
+  .should('have.class', 'text-red-500')
+
+
+  cy.get('button[name="watched"]').click();
+
+    cy.get('button[name="watched"] svg', { timeout: 10000 })
+  .should('have.class', 'text-red-500')
+
+    cy.get('button[name="watched"]').click();
+
+    cy.get('button[name="watched"] svg', { timeout: 10000 })
+  .should('have.class', 'text-red-500')
+
+
+
+  cy.get('button[name="watchlist"]').click();
+
+    cy.get('button[name="watchlist"] svg', { timeout: 10000 })
+  .should('have.class', 'text-red-500')
+
+    cy.get('button[name="watchlist"]').click();
+
+    cy.get('button[name="watchlist"] svg', { timeout: 10000 })
+  .should('have.class', 'text-red-500')
+
+    cy.visit('http://localhost:3000/user/VsaoLp3zA4ILTjbG4Rh1xz')
+
+
+    cy.get('img:visible').each(($img) => {
+  cy.wrap($img).should(($el) => {
+    const img = $el[0] as HTMLImageElement
+    expect(img.naturalWidth).to.be.greaterThan(0)
+  })
+})
+
+    cy.visit('http://localhost:3000/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz?')
+
+    cy.get('input[name="username"]').clear().type('mateo');
+
+    cy.get('button[name="editP"]').click();
+
+    cy.visit('http://localhost:3000/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz?')
+
+    cy.get('input[name="username"]').clear().type('zuran mateo')
+
+    cy.get('button[name="editP"]').click();
+    
+
+    cy.visit('http://localhost:3000/');
+
+    cy.get('button[type="submit"][name="logout"]').should("exist");
+
     cy.get('button[type="submit"][name="logout"]').click();
 
     cy.getCookie("next-auth.session-token").should("not.exist");
-
-    cy.get('a[href*="login"]').click()
-
-    
   })
 })

@@ -1,6 +1,53 @@
 import { TIMEOUT } from "dns"
 
 describe('check working', () => {
+  it('login, update profile, logout', () => {
+    cy.visit('http://localhost:3000/')
+    
+    cy.get('a[href*="login"]').click()
+ 
+    // The new url should include "/about"
+    cy.url({timeout: 10000}).should('include', '/login')
+ 
+    // The new page should contain an h1 with "About", this is example only
+    //cy.get('h1').contains('login')
+
+    cy.get('input[type="email"]')
+      .type("zuranmateo@gmail.com");
+
+    cy.get('input[type="password"]')
+      .type("123");
+
+    cy.get('button[type="submit"][name="login"]')
+      .click();
+
+    cy.location('pathname', { timeout: 10000 })
+    .should('eq', '/')
+
+    cy.get('a[href*="movies"]', { timeout: 10000 }).should('be.visible')
+
+    cy.visit('http://localhost:3000/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz?')
+
+    cy.get('input[name="username"]').clear().type('mateo');
+
+    cy.get('button[name="editP"]').click();
+
+    cy.visit('http://localhost:3000/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz?')
+
+    cy.get('input[name="username"]').clear().type('zuran mateo')
+
+    cy.get('button[name="editP"]').click();
+    
+
+    cy.visit('http://localhost:3000/');
+
+    cy.get('button[type="submit"][name="logout"]', {timeout: 10000}).should("exist");
+
+    cy.get('button[type="submit"][name="logout"]').click();
+
+    cy.getCookie("next-auth.session-token", {timeout: 10000}).should("not.exist");
+  })
+
   it('login, open movies, press all buttons', () => {
     cy.visit('http://localhost:3000/')
     
@@ -24,9 +71,7 @@ describe('check working', () => {
     cy.location('pathname', { timeout: 10000 })
     .should('eq', '/')
 
-    cy.intercept('GET', '/api/auth/session').as('session')
-
-    cy.get('button[type="submit"][name="logout"]', { timeout: 10000 }).should('exist')
+    cy.get('a[href*="movies"]', { timeout: 10000 }).should('be.visible')
 
     cy.get('a[href*="movies"]').click();
 
@@ -107,26 +152,5 @@ describe('check working', () => {
     expect(img.naturalWidth).to.be.greaterThan(0)
   })
 })
-
-    cy.visit('http://localhost:3000/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz?')
-
-    cy.get('input[name="username"]').clear().type('mateo');
-
-    cy.get('button[name="editP"]').click();
-
-    cy.visit('http://localhost:3000/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz?')
-
-    cy.get('input[name="username"]').clear().type('zuran mateo')
-
-    cy.get('button[name="editP"]').click();
-    
-
-    cy.visit('http://localhost:3000/');
-
-    cy.get('button[type="submit"][name="logout"]', {timeout: 10000}).should("exist");
-
-    cy.get('button[type="submit"][name="logout"]').click();
-
-    cy.getCookie("next-auth.session-token", {timeout: 10000}).should("not.exist");
   })
 })

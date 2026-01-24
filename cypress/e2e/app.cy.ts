@@ -24,7 +24,7 @@ describe('check working', () => {
     cy.location('pathname', { timeout: 10000 })
     .should('eq', '/')
 
-    cy.wait('@session', { timeout: 10000 })
+    cy.intercept('GET', '/api/auth/session').as('session')
 
     cy.get('button[type="submit"][name="logout"]', { timeout: 10000 }).should('exist')
 

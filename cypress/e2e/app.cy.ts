@@ -21,11 +21,19 @@ describe('check working', () => {
     cy.get('button[type="submit"][name="login"]')
       .click();
 
-    cy.get('a[href*="movies"]').click();
+    cy.location('pathname', { timeout: 10000 })
+    .should('eq', '/')
+
+    cy.intercept('GET', '/api/auth/session').as('session')
+
+    cy.wait('@session', { timeout: 10000 })
 
     cy.get('button[type="submit"][name="logout"]', { timeout: 10000 }).should('exist')
 
-    cy.url({timeout: 10000}).should('include', '/movies');
+    cy.get('a[href*="movies"]').click();
+
+    cy.location('pathname', { timeout: 10000 })
+    .should('eq', '/movies')
 
     cy.get('img:visible').each(($img) => {
   cy.wrap($img).should(($el) => {

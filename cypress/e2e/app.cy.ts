@@ -21,9 +21,6 @@ describe('check working', () => {
     cy.get('button[type="submit"][name="login"]')
       .click();
 
-    cy.get('button[type="submit"][name="logout"]', { timeout: 10000 })
-  .should('exist')
-
     cy.get('a[href*="movies"]').click();
 
     cy.get('button[type="submit"][name="logout"]', { timeout: 10000 }).should('exist')

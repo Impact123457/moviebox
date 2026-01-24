@@ -25,6 +25,8 @@ describe('check working', () => {
 
     cy.get('a[href*="movies"]', { timeout: 15000 }).should('be.visible')
 
+    cy.getCookie('authjs.session-token', { timeout: 20000 }).should('exist')
+
     cy.visit('http://localhost:3000/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz?')
 
     cy.get('input[name="username"]').clear().type('mateo');
@@ -66,6 +68,8 @@ describe('check working', () => {
     cy.location('pathname', { timeout: 15000 }).should('eq', '/')
 
     cy.get('a[href*="movies"]', { timeout: 15000 }).should('be.visible')
+
+    cy.getCookie('authjs.session-token', { timeout: 20000 }).should('exist')
 
     cy.get('a[href*="movies"]').click();
 
@@ -136,9 +140,6 @@ describe('check working', () => {
 
     cy.get('button[name="watchlist"] svg', { timeout: 10000 })
   .should('have.class', 'text-red-500')
-
-    cy.visit('http://localhost:3000/user/VsaoLp3zA4ILTjbG4Rh1xz')
-
 
     cy.get('img:visible').each(($img) => {
   cy.wrap($img).should(($el) => {

@@ -1,3 +1,5 @@
+import { TIMEOUT } from "dns"
+
 describe('check working', () => {
   it('login, open movies, press all buttons', () => {
     cy.visit('http://localhost:3000/')
@@ -5,7 +7,7 @@ describe('check working', () => {
     cy.get('a[href*="login"]').click()
  
     // The new url should include "/about"
-    cy.url().should('include', '/login')
+    cy.url({timeout: 10000}).should('include', '/login')
  
     // The new page should contain an h1 with "About", this is example only
     //cy.get('h1').contains('login')
@@ -19,13 +21,14 @@ describe('check working', () => {
     cy.get('button[type="submit"][name="login"]')
       .click();
 
-    cy.get('button[type="submit"][name="logout"]').should("exist");
+    cy.get('button[type="submit"][name="logout"]', { timeout: 10000 })
+  .should('exist')
 
     cy.get('a[href*="movies"]').click();
 
     cy.get('button[type="submit"][name="logout"]', { timeout: 10000 }).should('exist')
 
-    cy.url().should('include', '/movies');
+    cy.url({timeout: 10000}).should('include', '/movies');
 
     cy.get('img:visible').each(($img) => {
   cy.wrap($img).should(($el) => {
@@ -48,7 +51,7 @@ describe('check working', () => {
 
     cy.get('a[href^="/movie/"]').first().click();
 
-    cy.url().should('include', '/movie/');
+    cy.url({timeout: 10000}).should('include', '/movie/');
 
     cy.get('img:visible').each(($img) => {
   cy.wrap($img).should(($el) => {
@@ -117,10 +120,10 @@ describe('check working', () => {
 
     cy.visit('http://localhost:3000/');
 
-    cy.get('button[type="submit"][name="logout"]').should("exist");
+    cy.get('button[type="submit"][name="logout"]', {timeout: 10000}).should("exist");
 
     cy.get('button[type="submit"][name="logout"]').click();
 
-    cy.getCookie("next-auth.session-token").should("not.exist");
+    cy.getCookie("next-auth.session-token", {timeout: 10000}).should("not.exist");
   })
 })

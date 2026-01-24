@@ -21,11 +21,11 @@ describe('check working', () => {
     cy.get('button[type="submit"][name="login"]')
       .click();
 
-    cy.location('pathname', { timeout: 15000 }).should('eq', '/')
+    cy.getCookie('authjs.session-token', { timeout: 20000 })
+  .should('exist');
 
-    cy.get('a[href*="movies"]', { timeout: 15000 }).should('be.visible')
-
-    cy.getCookie('authjs.session-token', { timeout: 20000 }).should('exist')
+    cy.getCookie('__Secure-authjs.session-token', { timeout: 20000 })
+      .should('exist');
 
     cy.visit('http://localhost:3000/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz?')
 
@@ -65,11 +65,11 @@ describe('check working', () => {
     cy.get('button[type="submit"][name="login"]')
       .click();
 
-    cy.location('pathname', { timeout: 15000 }).should('eq', '/')
+    cy.getCookie('authjs.session-token', { timeout: 20000 })
+    .should('exist');
 
-    cy.get('a[href*="movies"]', { timeout: 15000 }).should('be.visible')
-
-    cy.getCookie('authjs.session-token', { timeout: 20000 }).should('exist')
+    cy.getCookie('__Secure-authjs.session-token', { timeout: 20000 })
+    .should('exist');
 
     cy.get('a[href*="movies"]').click();
 

@@ -21,8 +21,9 @@ describe('check working', () => {
     cy.get('button[type="submit"][name="login"]')
       .click();
 
-    cy.location('pathname', { timeout: 10000 })
-    .should('eq', '/')
+    cy.location('pathname', { timeout: 15000 }).should('eq', '/')
+
+    cy.get('a[href*="movies"]', { timeout: 15000 }).should('be.visible')
 
     cy.visit('http://localhost:3000/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz?')
 
@@ -51,12 +52,8 @@ describe('check working', () => {
     
     cy.get('a[href*="login"]').click()
  
-    // The new url should include "/about"
     cy.url({timeout: 10000}).should('include', '/login')
  
-    // The new page should contain an h1 with "About", this is example only
-    //cy.get('h1').contains('login')
-
     cy.get('input[type="email"]')
       .type("zuranmateo@gmail.com");
 
@@ -66,10 +63,9 @@ describe('check working', () => {
     cy.get('button[type="submit"][name="login"]')
       .click();
 
-    cy.location('pathname', { timeout: 10000 })
-    .should('eq', '/')
+    cy.location('pathname', { timeout: 15000 }).should('eq', '/')
 
-    cy.get('a[href*="movies"]', { timeout: 30000 }).should('be.visible')
+    cy.get('a[href*="movies"]', { timeout: 15000 }).should('be.visible')
 
     cy.get('a[href*="movies"]').click();
 

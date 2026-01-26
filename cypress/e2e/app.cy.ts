@@ -1,8 +1,6 @@
-import { TIMEOUT } from "dns"
-
 describe('check working', () => {
   it('login, update profile, logout', () => {
-    cy.visit('http://localhost:3000/')
+    cy.visit('/')
     
     cy.get('a[href*="login"]').click()
  
@@ -27,20 +25,20 @@ describe('check working', () => {
 
     cy.location('pathname', { timeout: 20000 }).should('eq', '/');
 
-    cy.visit('http://localhost:3000/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz?');
+    cy.visit('/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz?');
 
     cy.get('input[name="username"]').clear().type('mateo');
 
     cy.get('button[name="editP"]').click();
 
-    cy.visit('http://localhost:3000/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz?')
+    cy.visit('/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz?')
 
     cy.get('input[name="username"]').clear().type('zuran mateo')
 
     cy.get('button[name="editP"]').click();
     
 
-    cy.visit('http://localhost:3000/');
+    cy.visit('/');
 
     cy.get('button[type="submit"][name="logout"]', {timeout: 10000}).should("exist");
 
@@ -50,7 +48,7 @@ describe('check working', () => {
   })
 
   it('login, open movies, press all buttons', () => {
-    cy.visit('http://localhost:3000/')
+    cy.visit('/')
     
     cy.get('a[href*="login"]').click()
  

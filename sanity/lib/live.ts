@@ -7,4 +7,6 @@ import "server-only";
 
 export const { sanityFetch, SanityLive } = defineLive({
   client,
+  serverToken: false,
+  browserToken: false
 });

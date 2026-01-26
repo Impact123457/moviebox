@@ -1,6 +1,19 @@
 describe('check working', () => {
   it('login', () => {
-    
+    it('debug api login', () => {
+    cy.request({
+      method: 'POST',
+      url: '/api/login',
+      body: {
+        email: 'zuranmateo@gmail.com',
+        password: '123',
+      },
+      failOnStatusCode: false,
+    }).then((res) => {
+      console.log('STATUS:', res.status)
+      console.log('BODY:', res.body)
+    })
+  })
   })
 
   beforeEach(() => {
@@ -9,7 +22,7 @@ describe('check working', () => {
   })
 
   it('update profile, logout', () => {
-    
+    console.log("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
     cy.location('pathname', { timeout: 20000 }).should('eq', '/');
     cy.visit('/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz');
 

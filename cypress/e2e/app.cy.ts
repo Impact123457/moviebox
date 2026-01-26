@@ -1,5 +1,13 @@
 describe('check working', () => {
-  it('login, update profile, logout', () => {
+  it('login', () => {
+    
+  })
+
+  beforeEach(() => {
+    cy.session('user', () => cy.login())
+  })
+
+  it('update profile, logout', () => {
     cy.visit('/')
     
     cy.get('a[href*="login"]').click()
@@ -44,8 +52,7 @@ describe('check working', () => {
 
     cy.getCookie("next-auth.session-token", {timeout: 10000}).should("not.exist");
   })
-
-  it('login, open movies, press all buttons', () => {
+  it('open movies, press all buttons', () => {
     cy.visit('/')
     
     cy.get('a[href*="login"]').click()

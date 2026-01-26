@@ -15,6 +15,7 @@ jobs:
       NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
       SANITY_WRITE_TOKEN: ${{ secrets.SANITY_WRITE_TOKEN }}
       NEXT_PUBLIC_SANITY_API_VERSION: ${{ secrets.NEXT_PUBLIC_SANITY_API_VERSION }}
+      NEXTAUTH_URL: ${{secrets.NEXTAUTH_URL}}
       
     steps:
       - name: Checkout

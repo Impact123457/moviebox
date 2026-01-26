@@ -22,7 +22,6 @@ describe('check working', () => {
   })
 
   it('update profile, logout', () => {
-    console.log("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
     cy.location('pathname', { timeout: 20000 }).should('eq', '/');
     cy.visit('/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz');
 

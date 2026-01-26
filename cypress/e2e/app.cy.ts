@@ -4,33 +4,13 @@ describe('check working', () => {
   })
 
   beforeEach(() => {
-    cy.session('user', () => cy.login())
+    cy.login();
+    //cy.session('user', () => cy.login())
   })
 
   it('update profile, logout', () => {
-    cy.visit('/')
     
-    cy.get('a[href*="login"]').click()
- 
-    // The new url should include "/about"
-    cy.url({timeout: 10000}).should('include', '/login')
- 
-    // The new page should contain an h1 with "About", this is example only
-    //cy.get('h1').contains('login')
-    cy.intercept('GET', '/api/auth/session').as('session');
-    cy.get('input[type="email"]')
-      .type("zuranmateo@gmail.com");
-
-    cy.get('input[type="password"]')
-      .type("123");
-
-    cy.get('button[type="submit"][name="login"]')
-      .click();
-
-    cy.wait('@session', { timeout: 20000 });
-
     cy.location('pathname', { timeout: 20000 }).should('eq', '/');
-
     cy.visit('/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz');
 
     cy.get('input[name="username"]').clear().type('mateo');
@@ -53,27 +33,7 @@ describe('check working', () => {
     cy.getCookie("next-auth.session-token", {timeout: 10000}).should("not.exist");
   })
   it('open movies, press all buttons', () => {
-    cy.visit('/')
     
-    cy.get('a[href*="login"]').click()
- 
-    cy.url({timeout: 10000}).should('include', '/login')
- 
-    cy.get('input[type="email"]')
-      .type("zuranmateo@gmail.com");
-
-    cy.get('input[type="password"]')
-      .type("123");
-
-    cy.intercept('GET', '/api/auth/session').as('session');
-
-    cy.get('button[type="submit"][name="login"]')
-      .click();
-
-    
-    cy.wait('@session', { timeout: 20000 });
-
-    cy.location('pathname', { timeout: 20000 }).should('eq', '/');
 
     cy.get('a[href*="movies"]', {timeout: 20000}).click();
 
@@ -153,3 +113,51 @@ describe('check working', () => {
 })
   })
 })
+
+/**
+ * cy.visit('/')
+    
+    cy.get('a[href*="login"]').click()
+ 
+    // The new url should include "/about"
+    cy.url({timeout: 10000}).should('include', '/login')
+ 
+    // The new page should contain an h1 with "About", this is example only
+    //cy.get('h1').contains('login')
+    cy.intercept('GET', '/api/auth/session').as('session');
+    cy.get('input[type="email"]')
+      .type("zuranmateo@gmail.com");
+
+    cy.get('input[type="password"]')
+      .type("123");
+
+    cy.get('button[type="submit"][name="login"]')
+      .click();
+
+    cy.wait('@session', { timeout: 20000 });
+
+    cy.location('pathname', { timeout: 20000 }).should('eq', '/');
+ */
+/**
+ * cy.visit('/')
+    
+    cy.get('a[href*="login"]').click()
+ 
+    cy.url({timeout: 10000}).should('include', '/login')
+ 
+    cy.get('input[type="email"]')
+      .type("zuranmateo@gmail.com");
+
+    cy.get('input[type="password"]')
+      .type("123");
+
+    cy.intercept('GET', '/api/auth/session').as('session');
+
+    cy.get('button[type="submit"][name="login"]')
+      .click();
+
+    
+    cy.wait('@session', { timeout: 20000 });
+
+    cy.location('pathname', { timeout: 20000 }).should('eq', '/');
+ */

@@ -1,5 +1,6 @@
 describe('check working', () => {
   it('login', () => {
+    //preveri session da dejansko dela, ter preveri login
     it('debug api login', () => {
     cy.request({
       method: 'POST',
@@ -17,11 +18,13 @@ describe('check working', () => {
   })
 
   beforeEach(() => {
+    //pred vsakim testom se izvede login funkcija.
     cy.login();
     //cy.session('user', () => cy.login())
   })
 
   it('update profile, logout', () => {
+    //najde lokacijo, gre na edit profile in editaa cel profile. 
     cy.location('pathname', { timeout: 20000 }).should('eq', '/');
     cy.visit('/user/editProfile/VsaoLp3zA4ILTjbG4Rh1xz');
 
@@ -44,8 +47,8 @@ describe('check working', () => {
 
     cy.getCookie("next-auth.session-token", {timeout: 10000}).should("not.exist");
   })
-  it('open movies, press all buttons', () => {
-    
+  it('open movies, search movies, press all buttons', () => {
+    //odpre movies, išče film in poklika vse gumbe
 
     cy.get('a[href*="movies"]', {timeout: 20000}).click();
 

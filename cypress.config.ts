@@ -5,5 +5,11 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
+    baseUrl: 'http://localhost:3000',
+    responseTimeout: 120e3,
+    retries: {
+      runMode: 2,
+      openMode: 0,
+    },
   },
 });

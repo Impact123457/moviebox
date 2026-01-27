@@ -109,7 +109,7 @@ export default function Update({user}: {user: UserType}){
                         />
                     {errors.title && <p className='comment-form-error'>{errors.title}</p>}
                     </div>
-                <button type='submit' className="logButton bg-white text-black border-black" disabled={isPending}>
+                <button type='submit' name='editP' className="logButton bg-white text-black border-black" disabled={isPending}>
                     {isPending ? 'Submitting...' : 'Update profile'}
                 </button>
             </form>

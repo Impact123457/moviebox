@@ -35,3 +35,36 @@
 //     }
 //   }
 // }
+/// <reference types="cypress" />
+
+import { mount } from 'cypress/react'
+
+/* =========================
+   CUSTOM COMMANDS
+========================= */
+
+Cypress.Commands.add('login', () => {
+  cy.visit('/login')
+
+  cy.get('input[type="email"]').type('zuranmateo@gmail.com');
+  cy.get('input[type="password"]').type('123');
+
+  cy.get('button[type="submit"][name="login"]').click();
+})
+
+Cypress.Commands.add('mount', mount)
+
+/* =========================
+   TYPESCRIPT DECLARATIONS
+========================= */
+
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      login(): Chainable<void>
+      mount: typeof mount
+    }
+  }
+}
+
+export {}

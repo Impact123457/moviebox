@@ -13,7 +13,8 @@
     "start": "next start",
     "lint": "eslint",
     "cypress:open": "cypress open",
-    "test:e2e": "cypress run"
+    "test:e2e": "cypress run",
+    "test:component": "cypress run --component"
   },
   "dependencies": {
     "@sanity/image-url": "^1.2.0",

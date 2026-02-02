@@ -1,8 +1,6 @@
 import React from "react";
 import Home from "@/app/(root)/page";
 import LoginPage from "@/app/(root)/login/page";
-import RegisterPage from "@/app/(root)/signUp/page";
-import * as nextNavigation from "next/navigation";
 
 describe("<Home />", () => {
   it("renders", () => {

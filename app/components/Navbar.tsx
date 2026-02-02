@@ -5,7 +5,7 @@ import { auth, signOut } from "@/auth";
 export default async function Navbar(){   
     const session = await auth();//pridobi uporabnika iz session
     return(
-        <header className="bg-white shadow-sm">
+    <header className="bg-white shadow-sm">
         <nav className="flex justify-between items-center">
             <div className="p-3">
                 <Link href="/" id="logo">

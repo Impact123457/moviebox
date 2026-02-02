@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+//validira vnos podatkov iz forma
 export const profileSchema = z.object({
     username: z.string().min(3).max(50),
     bio: z.string().max(100),

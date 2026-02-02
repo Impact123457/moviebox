@@ -23,6 +23,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  //toaster dovoljuje da spletna stran lahko uporablja toast. toast je lepo oblikovano pojavno okno
   return (
     <html lang="en">
       <body

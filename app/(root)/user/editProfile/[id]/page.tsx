@@ -6,6 +6,7 @@ import { User } from "@/sanity/types";
 import Update from "@/app/components/Update";
 import { redirect } from "next/navigation";
 
+//definiran tip spremenljivke
 export type UserType = Omit<User, "name" | "surname" | "username" | "bio" | "email" | "image" | "imageUrl"> & {
     name?: string | undefined;
     surname?: string | undefined;
@@ -15,14 +16,17 @@ export type UserType = Omit<User, "name" | "surname" | "username" | "bio" | "ema
     image?: string | undefined;
     imageUrl?: string | undefined;
 }
-export default async function edit({ params }: { params: { id: string } }){
+export default async function Edit({ params }: { params: { id: string } }){
   const session = await auth();
   const { id } = await params;
   const user = await writeClient.fetch(USER_BY_ID_QUERY, {id});
+
+  //preveri ce obstaja user
   if(session?.user.provider != "credentials") redirect("/");
   
   return (
     <section className="p-5 my-5 shadow-lg w-[600px] mx-auto h-[500px]">
+      {/**klice Update, ki prikaze form z vsemi obstojecimi podatki */}
       <Update user={user} />
         <Link href={`/user/${session?.user?.id}`} className="block w-full border bg-black  text-white text-center cursor-pointer p-2 rounded">
             Back

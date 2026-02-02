@@ -37,7 +37,7 @@ export const USER_BY_EMAIL_QUERY = defineQuery(
 }`
 );
 
-export const CHECK_FOR_EXISTING_USER = `*[_type == "author" && email == $email][0]`;
+export const CHECK_FOR_EXISTING_USER = `*[_type == "user" && email == $email][0]`;
 
 export const MOVIE_BY_ID_QUERY = `
 *[_type == "movie" && _id == $id][0]{

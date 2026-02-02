@@ -4,17 +4,31 @@ import { auth } from "@/auth";
 import { SEEN_MOVIE } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 
-export default async function edit(){
-    const session = await auth();//a je user prijavlen
+//Definiran tip filma
+export type Movie = {
+    _id: string;
+    title?: string;
+    release?: string;
+    description?: string;
+    genre?: string;
+    Director?: string;
+    image?: string;
+};
+
+export default async function Watchlist(){
+    const session = await auth(); //pridobi uporabnika
     const user = session?.user;
     
+    //ali je user prijavljen
     if (!user) {
         return <p className="text-center">Please log in to see your liked movies.</p>;
     }
         
+    //pridobi filme iz watched
     const seen = await client.fetch(SEEN_MOVIE(user.id));
     const movie = seen?.[0]?.movies || [];
         
+    //preveri ce obstaja film ki je watched
     if (!movie || movie.length === 0) {
         return <div className="md:w-[900px] h-[550px] mx-auto flex items-center justify-center"><p className="text-center p-5">Start planing your next watch!!</p></div>
     }
@@ -24,7 +38,8 @@ export default async function edit(){
                 <h2 className="text-black p-3 font-bold text-[20px]">Pick your next watch:</h2>
                 <hr className="border border-black mb-1 shadow-lg" /> 
                 <ul className="cardDiv">
-                    {movie.map((movie: any) => (
+                    {/**prikaze vse filme v spremenljivki movie */}
+                    {movie.map((movie: Movie) => (
                         <li key={movie._id} className="w-[150px] h-[210px] overflow-hidden shadow">
                         <Link href={`/movie/${movie._id}`}>
                             <Image src={movie.image || '/logo.png'} alt={movie.title || "Movie Poster"} width={150} height={210} className="object-cover"/>

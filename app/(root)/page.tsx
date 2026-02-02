@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {auth} from "@/auth";
+
 export default async function Home() {
   return (
   <>
@@ -20,7 +20,6 @@ export default async function Home() {
     <div className="divImg">
       <Image src="/r2d2&c3po.png" alt="droids" width={400} height={400}/>
     </div>  
-
   </div>
   <section className="bg-black text-primary py-5">
       <h2 className="h2">WE OFFER YOU</h2>
@@ -34,7 +33,6 @@ export default async function Home() {
             </p>
           </div>
         </div>
-
         <div className="kartica">
           <div className="p-3">
             <h3 className="h3">Browsing movies</h3>
@@ -44,7 +42,6 @@ export default async function Home() {
             </p>
           </div>
         </div>
-
         <div className="kartica">
           <div className="p-3">
             <h3 className="h3">Log watched movies</h3>
@@ -54,7 +51,6 @@ export default async function Home() {
             </p>
           </div>
         </div>
-
         <div className="kartica">
           <div className="p-3">
             <h3 className="h3">Create lists</h3>

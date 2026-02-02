@@ -7,34 +7,32 @@ import { useRouter } from "next/navigation";
 import { Watch_list } from "@/lib/actions";
 import z from "zod";
 
-const WatchList = ({id, watchId}: {id: string, watchId: string | null}) => {
+export default function WatchList({id, watchId}: {id: string, watchId: string | null}){
     const [errors, setErrors] = useState<Record<string, string>>({});//shranjuje napake
         const router = useRouter();//navigacija
     
         const handleFormSubmit2 = async () => {
-                try{
-                    const result = await Watch_list(id);//doda al odstrani like
-                    if(result.status == 'SUCCESS'){
-                        toast.success("Movie added to watch list.")
-                    }
-                    else if(result.status == 'SUCCESSdislike'){
-                        toast.success("Movie removed from watch list.")
-                    }
-                    router.push("");
+            try{
+                const result = await Watch_list(id);//doda al odstrani like
+                if(result.status == 'SUCCESS'){
+                    toast.success("Movie added to watch list.")
                 }
-                catch (error){
-                    if(error instanceof z.ZodError){//če preverjanje podatkov na strežniku ne uspe
-                        const fieldErrors = error.flatten().fieldErrors;
-                        setErrors(fieldErrors as unknown as Record<string, string>);
-                        toast.error("Failed to add movie to watch list.");
-        
-                        return {error: 'Adding to watch list failed.', status:'ERROR'};
-                    }
-                    toast.error("Unexpected error");
-                    return {error: 'unexpected error', status: 'ERROR'};
-                } 
-            };
-    
+                else if(result.status == 'SUCCESSdislike'){
+                    toast.success("Movie removed from watch list.")
+                }
+                router.push("");
+            }
+            catch (error){
+                if(error instanceof z.ZodError){//če preverjanje podatkov na strežniku ne uspe
+                    const fieldErrors = error.flatten().fieldErrors;
+                    setErrors(fieldErrors as unknown as Record<string, string>);
+                    toast.error("Failed to add movie to watch list.");
+                    return {error: 'Adding to watch list failed.', status:'ERROR'};
+                }
+                toast.error("Unexpected error");
+                return {error: 'unexpected error', status: 'ERROR'};
+            } 
+        };
         const [state2, formAction, isPending] = useActionState(handleFormSubmit2,
             {
             error : '',
@@ -43,7 +41,8 @@ const WatchList = ({id, watchId}: {id: string, watchId: string | null}) => {
         );
     return(
         <form action={formAction}>
-            <button className="cursor-pointer mx-3">
+            <button className="cursor-pointer mx-3" name="watchlist">
+                {/**se prikaze glede na to ali je ze na watchlistu ali ne */}
                 {watchId 
                 ? <ListCheck className="w-10 h-10 text-red-500"/>
                 : <ListCheck className="w-10 h-10 text-black"/>}
@@ -51,4 +50,3 @@ const WatchList = ({id, watchId}: {id: string, watchId: string | null}) => {
         </form>
     )
 }
-export default WatchList;

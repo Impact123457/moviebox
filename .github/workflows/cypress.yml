@@ -43,26 +43,6 @@ jobs:
       - name: Build Next.js
         run: npm run build
 
-      - name: Start Next.js (background, log file)
-        run: |
-          nohup npm run start > app.log 2>&1 &
-          PID=$!
-          echo "Started next start as PID $PID"
-          npx wait-on http://localhost:3000
-          # lightly tail during run so logs stream into Actions output (optional)
-          (sleep 1; tail -f app.log) &
-        # keep the job alive and let Cypress run against the server
-
-      - name: Run Cypress
-        run: |
-          set -o pipefail
-          npm run test:e2e || EXIT_CODE=$?
-          if [ -n "$EXIT_CODE" ]; then
-            echo "Cypress failed with code $EXIT_CODE - printing last 400 lines of app.log"
-            tail -n 400 app.log || true
-            exit $EXIT_CODE
-          fi
-
       - name: Start Next.js
         run: npm run start &
 

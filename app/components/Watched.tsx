@@ -41,7 +41,7 @@ export default function Watched({id, watchedId}: {id: string, watchedId: string 
     );
     return(
         <form action={formAction}>
-            <button className="cursor-pointer mx-3">
+            <button className="cursor-pointer mx-3" name="watched">
                 {watchedId 
                 ? <Eye className="w-10 h-10 text-red-500"/>
                 : <Eye className="w-10 h-10 text-black"/>}

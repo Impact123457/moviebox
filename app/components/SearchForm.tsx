@@ -12,7 +12,7 @@ export default function SearchForm({query}: {query?: string}){
                 placeholder="search..."
             />
             <div className="gap-2">
-                <button type="submit">
+                <button type="submit" name="search">
                     <Image src="/search.png" alt="search" width={20} height={20} className="submit"/>
                 </button>
             </div>

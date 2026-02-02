@@ -44,7 +44,7 @@ export default function LoginPage() {
         </form>
         {/*GitHub*/}
         <p className="text-center">─────── or ───────</p>
-        <button onClick={() => signIn("github", {redirectTo:"/"})} className="logButton bg-white text-black border-black">Login with GitHub</button>
+        <button onClick={() => signIn("github", {redirectTo:"/"})} name="gitlogin" className="logButton bg-white text-black border-black">Login with GitHub</button>
         <p className="text-center">Don’t have an account?{" "}
         <a href="/signUp" className="text-blue-600 underline">Sign up</a>
         </p>

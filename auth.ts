@@ -7,6 +7,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  //zaupaj hostu da ne meče errorja o nezaupanju
+  trustHost: true,
   //providers so vsi nacini s katerimi se uporabnik lahko prijavi
   //lahko z credentials ali z github
   providers: [

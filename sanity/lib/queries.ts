@@ -45,6 +45,7 @@ export const MOVIE_BY_ID_QUERY = `
   title,
   release,
   description,
+  link,
    genre[]->{
     _id,
     name
@@ -136,13 +137,14 @@ export const USER_QUERY =
     *[_type == "watched" && user._ref == $userId][0]
   `);
 
+
   export const WATCHED_BY_MOVIE_USER_ID_QUERY = defineQuery(`
     *[
       _type == "watched" &&
       references($id) &&
       user._ref == $userId
      ][0]
-  `)//če je pravi user in če je že v arrayu
+  `)
 
   export const WATCHLIST_BY_USER_ID_QUERY = defineQuery(`
     *[_type == "watchList" && user._ref == $userId][0]

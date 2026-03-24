@@ -46,6 +46,18 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
 
   return (
   <>
+    <div>
+      <iframe className="p-5 my-5 shadow-lg md:w-[900px] mx-auto h-[520px]"
+        width="560"
+        height="315"
+        src={movie.link}
+        title={movie.title}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      >
+      </iframe>
+    </div>
     <div className="p-5 my-5 shadow-lg md:w-[900px] mx-auto h-[520px]">
       <div className="flex gap-6 ">
         <div className="m-5">
@@ -72,5 +84,3 @@ export default async function MoviePage(props: { params: Promise<{ id: string }>
   </>
   );
 }
-
-

@@ -26,6 +26,10 @@ export const movie = defineType({
       type: 'image',
     }),
     defineField({
+      name: 'link',
+      type: 'url',
+    }),
+    defineField({
       name: 'genre',
       type: 'array',
       of: [{type: 'reference', to: [{ type: 'genre' }]}]

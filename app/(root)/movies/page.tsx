@@ -1,5 +1,4 @@
 import { MOVIE_QUERY } from "@/sanity/lib/queries";
-import { client } from "@/sanity/lib/client";
 import MovieCard, { MovieTypeCard } from "@/app/components/MovieCard";
 import SearchForm from "@/app/components/SearchForm";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";

@@ -57,10 +57,9 @@ export default async function Home() {
 
         <div className="kartica">
           <div className="p-3">
-            <h3 className="h3">Create lists</h3>
+            <h3 className="h3">Whatching movies</h3>
             <p className="text">
-              Organize movies into themed or personal collections, like 
-              “Absolute cinema” or “Cozy night” for easy access.
+              Discover and whatch new movies, or just keep rewatching the classics.
             </p>
           </div>
         </div>

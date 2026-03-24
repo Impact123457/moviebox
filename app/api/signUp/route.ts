@@ -4,12 +4,13 @@ import { writeClient } from "@/sanity/lib/write-client";
 import { CHECK_FOR_EXISTING_USER } from "@/sanity/lib/queries";
 import fs from "fs";
 import path from "path";
-import { client } from "@/sanity/lib/client";
 
 export async function POST(req: NextRequest) {
   try {
+    //pridobi podatke
     const { name, email, password, surname, username } = await req.json();
 
+    //preveri da je vse vpisano
     if (!name || !surname || !username || !email || !password) {
       return NextResponse.json(
         { error: "All fields are required" },
@@ -30,6 +31,7 @@ export async function POST(req: NextRequest) {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    //spremeni image v buffer, kaj je binarni "raw" sistem za slike in jo pripravi za shranjevanje v bazo. Sliko dobi iz public
     const filePath = path.join(process.cwd(), "public", "defaultPFP.jpg");
     const buffer = fs.readFileSync(filePath);
 
@@ -40,22 +42,23 @@ export async function POST(req: NextRequest) {
     )
      console.log("Image asset:", imageAsset);
     
-
- const newUser = await writeClient.create({
-  _type: "user", 
-  name,
-  surname,
-  username,
-  email,
-  password: hashedPassword,
-  image: {
-    _type: 'image',
-    asset: {
-      _type: 'reference',
-      _ref: imageAsset._id,
+  //naredi novega uporabnika
+  const newUser = await writeClient.create({
+    _type: "user", 
+    name,
+    surname,
+    username,
+    email,
+    password: hashedPassword,
+    image: {
+      _type: 'image',
+      asset: {
+        _type: 'reference',
+        _ref: imageAsset._id,
+      }
     }
-  }
-});
+  });
+  //odgovor, ali je error ali uspesno
     return NextResponse.json(
       { message: "User created successfully", userId: newUser._id },
       { status: 201 }

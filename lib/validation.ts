@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+export const FormSchema = z.object({
+    title: z.string().min(3).max(100),
+    description: z.string().min(5).max(1000)
+})
+
 export const profileSchema = z.object({
     username: z.string().min(3).max(50),
     bio: z.string().max(100),
@@ -17,3 +22,7 @@ export const profileSchema = z.object({
     )
 })
 
+export const EditCommentSchema = z.object({
+    title: z.string().min(3).max(100),
+    desc: z.string().min(5).max(1000),
+})

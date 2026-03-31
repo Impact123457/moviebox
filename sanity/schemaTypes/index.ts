@@ -7,7 +7,8 @@ import { comment } from './comment';
 import { liked } from './liked';
 import { watched } from './watched';
 import { watchList } from './watchList';
+import { update } from './update';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [user, directior, movie, genre, comment, liked, watched, watchList],
+  types: [user, directior, movie, genre, comment, liked, watched, watchList, update],
 }

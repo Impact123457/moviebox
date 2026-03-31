@@ -1,5 +1,6 @@
 'use server'
 
+import  slugify  from "slugify";
 import { auth } from "@/auth"
 import { parseServerActionResponse } from "./utils";
 import { writeClient } from "@/sanity/lib/write-client";
@@ -8,6 +9,55 @@ import {
     WATCHED_BY_MOVIE_USER_ID_QUERY, WATCHED_BY_USER_ID_QUERY,
     WATCHLIST_BY_MOVIE_USER_ID_QUERY, WATCHLIST_BY_USER_ID_QUERY,
 } from "@/sanity/lib/queries";
+
+//create coment
+export const createComment = async (state: any, form: FormData, description: string) => {
+    const session = await auth();
+
+    if(!session) return parseServerActionResponse({
+        error: 'Not singed in',
+        status: 'Error',
+
+    });
+
+    const { title } = Object.fromEntries(
+        Array.from(form).filter(([key]) => key != 'description')
+    )
+
+    const slug = slugify(title as string, {lower: true, strict: true})
+
+    try{
+        const comment = {
+            title,
+            description,
+            slug:{
+                _type: slug,
+                current: slug,
+            },
+            user: {
+                _type: 'reference',
+                _ref: session?.user?._id,
+            }
+        }
+
+        const result = await writeClient.create({_type: 'comment', ...comment})
+        //console.log(comment);
+
+        return parseServerActionResponse({
+            ...result,
+            error: '',
+            status: 'SUCCESS'
+        })
+    }
+    catch(error){
+        console.log(error);
+
+        return parseServerActionResponse({
+            error: JSON.stringify(error),
+            status: 'ERROR'
+        });
+    }
+}
 
 //za update profile:
 export const UpdateProfile= async (state: any, form: FormData, _id: string) =>{

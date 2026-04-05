@@ -1,4 +1,4 @@
-import CommentForm from "@/components/CommentForm"
+import CommentForm from "@/app/components/CommentForm";
 import { redirect } from "next/navigation"
 import { auth } from "@/auth";
 
@@ -11,11 +11,13 @@ export default async function Page(){
   }
 
   return (
-    <div className="main">
-      <h1 className="subheading">
+    <div className="main flex flex-col items-center justify-between">
+      <div className="px-5 my-3 flex flex-col items-center shadow-lg">
+        <h1 className="subheading">
         CREATE COMMENT
       </h1>
       <CommentForm />
+      </div>
     </div>
   )
 }

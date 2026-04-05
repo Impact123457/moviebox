@@ -28,8 +28,6 @@ export type Comment = {
   text?: string;
 };
 
-//export type Markdown = string;
-
 export type List = {
   _id: string;
   _type: "list";

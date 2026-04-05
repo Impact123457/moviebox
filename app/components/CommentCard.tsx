@@ -1,11 +1,13 @@
-import { Markdown, Slug, Comment, User } from "@sanity/types.ts"
-
+import { Markdown, Slug, Comment, User } from "@/sanity.types"
 import { FormatDate } from "@/lib/utils"
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import markdownit  from "markdown-it";
+import { Trash2, TrashIcon } from "lucide-react"
+import { DeleteComment } from "@/lib/actions"
+import DeleteCommentButton from "./ui/DeleteCommentButton"
 
 const md = markdownit();
 
@@ -36,19 +38,17 @@ export default async function CommentCard ({post}:{post: CommentCardType}){
     if(!session){
         redirect("./");
     }
-
   return (
-    <li className="comment-card">
-        <div className="flex-between text-textprimary px-5 py-7 min-h-[50px] rounded-xl">
+    <li className="mt-4">
+        <div className="flex-between shadow-xl px-5 py-7 min-h-[50px] rounded-xl">
             <Link href={`/user/${post?.user?._id}`}>
                 <div className="flex flex-row">
-
-                    <div>
+                    <div className="flex flex-row">
+                        <div>
                         <Image src={`${post?.user?.image || post?.user?.imageUrl || "/defaultProfileImg.png"}`  }  alt='profile picture' height={50} width={50} className='rounded-full mx-3 h-10 w-10' />
                     </div>
-
                     <div className="flex flex-col">
-                        <div className="text-white">
+                        <div className="">
                             {post?.user?.name}
                         </div>
 
@@ -56,24 +56,30 @@ export default async function CommentCard ({post}:{post: CommentCardType}){
                             {post?.user?.email}
                         </div>
                     </div>
+                    </div>
                 </div>
             </Link>
+            <div>
+                        {session.user.id == post.user?._id ? (
+                            <DeleteCommentButton _id={post._id} userId={session.user.id}/>
+                        ) : ("")}
+                    </div>
             <div className="flex flex-row justify-between rounded-xl">
-                <div className="bg-primary p-4 rounded-xl max-w-[500px] h-fit">
+                <div className="p-4 rounded-xl max-w-[500px] h-fit">
                     <h1 className="text-2xl">
                         {post?.title}
                     </h1>
                 </div>
 
                 <div>
-                    <p className="text-textgray text-md bg-primary p-3 rounded-xl">
+                    <p className="text-textgray text-md p-3 rounded-xl">
                         {FormatDate(post?._createdAt)}
                     </p>
                 </div>
             </div>
             
             <div className="items-center">
-                <div className="bg-primary p-4 rounded-xl h-fit text-textprimary break-all">
+                <div className=" p-4 rounded-xl h-fit break-all">
                     {ParsedContent ? (
                         <article
                             dangerouslySetInnerHTML={{__html : ParsedContent}}

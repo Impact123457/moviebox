@@ -37,7 +37,7 @@ export const USER_BY_EMAIL_QUERY = defineQuery(
 }`
 );
 
-export const CHECK_FOR_EXISTING_USER = `*[_type == "author" && email == $email][0]`;
+export const CHECK_FOR_EXISTING_USER = `*[_type == "user" && email == $email][0]`;
 
 export const MOVIE_BY_ID_QUERY = `
 *[_type == "movie" && _id == $id][0]{
@@ -110,7 +110,7 @@ export const SEEN_MOVIE = (userId: string) => `*[_type == "watchList" && user._r
   }
 }`
 
-export const USER_QUERY = 
+  export const USER_QUERY = 
   defineQuery(`*[_type == "movie"]{
     _id,
     name,
@@ -119,6 +119,12 @@ export const USER_QUERY =
     bio,
     password,
     "image": image.asset->url,
+  }`);
+
+  export const GENRE_QUERY = 
+  defineQuery(`*[_type == "genre"]{
+    _id,
+    name,
   }`);
 
   export const LIKE_BY_USER_ID_QUERY = defineQuery(`
@@ -157,3 +163,21 @@ export const USER_QUERY =
       user._ref == $userId
      ][0]
   `)
+
+  export const COMMENT_QUERY = defineQuery(`
+   *[_type == "comment" && defined(slug.current) && movie._ref == $id] | order(_createdAt desc) {
+   _id,
+   title,
+    _updatedAt,
+    _createdAt,
+    _rev,
+    _type,
+    slug,
+    user -> {
+    _id, name, surname, username, email, "image": image.asset->url, imageUrl, _createdAt, _updatedAt, _rev, _type
+    },
+    movie -> {_id
+    },
+    description,
+   }
+`)

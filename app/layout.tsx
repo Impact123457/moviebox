@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import 'easymde/dist/easymde.min.css';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,6 +24,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  //toaster dovoljuje da spletna stran lahko uporablja toast. toast je lepo oblikovano pojavno okno
   return (
     <html lang="en">
       <body

@@ -16,10 +16,10 @@ export type UserType = Omit<User, "name" | "surname" | "username" | "email" | "i
     email?: string | null;
     image?: string | null;
     imageUrl?: string | null;
+    id?: string | null;
 }
 
 export type CommentCardType = Omit<Comment, "title" | "slug" | "description" | "user"> & {
-    
     title?: string | null;
     slug?: Slug | null;
     description?: Markdown | null;
@@ -27,8 +27,7 @@ export type CommentCardType = Omit<Comment, "title" | "slug" | "description" | "
 };
 
 // Za prikaz komentarja na profilu uporabnika
-export default async function CommentCard ({post, authId}:{post: CommentCardType, authId: string}){
-
+export default async function CommentCard({post, authId}: {post: CommentCardType, authId: string}){
     const session = await auth();
     const ParsedContent = md.render(post?.description || "");
     
@@ -41,10 +40,16 @@ export default async function CommentCard ({post, authId}:{post: CommentCardType
 
             {/* Avtor komentarja + gumb za urejanje */}
             <div className="flex justify-between">
-                <Link href={`/user/${post?.user?._id}`}>
+                <Link href={`/user/${post?.user?.id}`}>
                     <div className="flex flex-row">
                         <div>
-                            <Image src={`${post?.user?.image || post?.user?.imageUrl || "/defaultProfileImg.png"}`}  alt="profile picture" height={50} width={50} className="rounded-full mx-3 h-10 w-10" />
+                            <Image 
+                                src={post?.user?.image || post?.user?.imageUrl || "/defaultPFP.jpg"} 
+                                alt="profile picture" 
+                                height={50} 
+                                width={50} 
+                                className="rounded-full mx-3 h-10 w-10" 
+                            />
                         </div>
 
                         <div className="flex flex-col">
@@ -59,11 +64,11 @@ export default async function CommentCard ({post, authId}:{post: CommentCardType
                     </div>
                 </Link>
                 <div>
-                    {session?.user?._id == authId ? 
+                    {session?.user?.id == authId ? 
                     <Link href={`editComment/${post?._id}`}>
                         <Edit className="text-white" />
                     </Link> : 
-                            ""
+                    ""
                     }
                 </div>
             </div>

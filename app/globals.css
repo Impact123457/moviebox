@@ -151,6 +151,15 @@ justify-between - 1. element da na levo 2. na desno(če jih je več jih enakomir
   .submit:hover{
     @apply cursor-pointer;
   }
+  .comment-form-label{
+    @apply mt-3;
+  }
+  .comment-form-part{
+    @apply my-2;
+  }
+  .comment-form-error{
+    @apply text-red-600;
+  }
 }
 
 /*

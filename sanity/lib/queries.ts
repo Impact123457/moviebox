@@ -57,19 +57,27 @@ export const MOVIE_BY_ID_QUERY = `
   "image": image.asset->url
 }`;
 export const MOVIE_QUERY = 
-  defineQuery(`*[_type == "movie" && !defined($search) || title match $search] | order(_createdAt desc) {
+  defineQuery(`
+    *[_type == "movie" &&
+  (
+    ($search == "" || title match $search) &&
+    ($gsearch == "" || $gsearch in genre[]->name)
+  )
+] | order(_createdAt desc) {
+  _id,
+  title,
+  release,
+  description,
+  genre->{
     _id,
-    title,
-    release,
-    description,
-    genre ->{
-    _id, name
-    },
-    director ->{
     name
-    },
-    "image": image.asset->url,
-  }`);
+  },
+  director->{
+    name
+  },
+  "image": image.asset->url
+}
+  `);
   
 export const LIKED_MOVIE = (userId: string) => `*[_type == "liked" && user._ref == "${userId}"]{
   movies[]->{

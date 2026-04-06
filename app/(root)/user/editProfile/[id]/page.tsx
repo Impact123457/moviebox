@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import Link from "next/link";
 import { writeClient } from "@/sanity/lib/write-client";
 import { USER_BY_ID_QUERY } from "@/sanity/lib/queries";
-import { User } from "@/sanity/sanity.types";
+import { User } from "@/sanity.types";
 import Update from "@/app/components/Update";
 import { redirect } from "next/navigation";
 

@@ -318,6 +318,14 @@
         },
         "optional": true
       },
+      "movie": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "movie.reference"
+        },
+        "optional": true
+      },
       "description": {
         "type": "objectAttribute",
         "value": {

@@ -1,12 +1,10 @@
-import { Markdown, Slug, Comment, User } from "@/sanity.types"
+import { Slug, Comment, User } from "@/sanity/types"
 import { FormatDate } from "@/lib/utils"
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import markdownit  from "markdown-it";
-import { Trash2, TrashIcon } from "lucide-react"
-import { DeleteComment } from "@/lib/actions"
 import DeleteCommentButton from "./ui/DeleteCommentButton"
 
 const md = markdownit();
@@ -24,7 +22,7 @@ export type UserType = Omit<User, "name" | "surname" | "username" | "email" | "i
 export type CommentCardType = Omit<Comment, "title" | "slug" | "description" | "user"> & {
     title?: string | null;
     slug?: Slug | null;
-    description?: Markdown | null;
+    description?: string | null;
     user?: UserType | null;
 };
 
@@ -51,7 +49,6 @@ export default async function CommentCard ({post}:{post: CommentCardType}){
                         <div className="">
                             {post?.user?.name}
                         </div>
-
                         <div className="text-sm text-textgray">
                             {post?.user?.email}
                         </div>

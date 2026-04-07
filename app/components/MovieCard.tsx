@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import {Movie, User} from "@/sanity/sanity.types";
+import {Movie, User} from "@/sanity.types";
 export type MovieTypeCard = Omit<Movie, "user"> & {
     image?: string;
 };

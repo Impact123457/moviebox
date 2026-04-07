@@ -1,4 +1,4 @@
-import { Markdown, Slug, Comment, User } from "@/sanity.types";
+import { Slug, Comment, User } from "@/sanity.types";
 import { FormatDate } from "@/lib/utils"
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
@@ -22,7 +22,7 @@ export type UserType = Omit<User, "name" | "surname" | "username" | "email" | "i
 export type CommentCardType = Omit<Comment, "title" | "slug" | "description" | "user"> & {
     title?: string | null;
     slug?: Slug | null;
-    description?: Markdown | null;
+    description?: string | null;
     user?: UserType | null;
 };
 
